@@ -1,7 +1,9 @@
-import { Box, Select, Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import { genres } from "../assets/constants";
+import { InputLabel, FormControl, NativeSelect } from "@mui/material";
 
 const Discover = () => {
+  const genreTitle = "Pop";
   return (
     <Box display="flex" flexDirection="column">
       <Box
@@ -11,19 +13,28 @@ const Discover = () => {
         mt={4}
         mb={10}
       >
-        <Typography variant="h4" component="h2" color="textPrimary">
-          Discover
+        <Typography variant="h4" component="h2">
+          Discover {genreTitle}
         </Typography>
-        <Select
-          native
-          className="bg-black text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5"
-        >
-          {genres.map((genre) => (
-            <option key={genre.value} value={genre.value}>
-              {genre.title}
-            </option>
-          ))}
-        </Select>
+
+        <FormControl>
+          <InputLabel variant="standard" htmlFor="genres-select">
+            genres
+          </InputLabel>
+          <NativeSelect
+            defaultValue={30}
+            inputProps={{
+              name: "age",
+              id: "genres-select",
+            }}
+          >
+            {genres.map((genre) => (
+              <option key={genre.value} value={genre.value}>
+                {genre.title}
+              </option>
+            ))}
+          </NativeSelect>
+        </FormControl>
       </Box>
 
       <Box display="flex" flexWrap="wrap" justifyContent="flex-start">
