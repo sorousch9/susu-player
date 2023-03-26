@@ -1,4 +1,4 @@
-import { Card, Col, Row, ProgressBar } from "react-bootstrap";
+import { Card, Col, Row, ProgressBar, Button } from "react-bootstrap";
 
 const Musicbox = () => {
   return (
@@ -12,19 +12,29 @@ const Musicbox = () => {
             </Card.Subtitle>
             <Row className="align-items-center">
               <Col>
-                <i className="bi bi-skip-backward" />
+                <Button variant="outline-dark">
+                  <i className="bi bi-skip-backward" />
+                </Button>
               </Col>
               <Col>
-                <i className="bi bi-arrow-counterclockwise"></i>
+                <Button variant="outline-dark">
+                  <i className="bi bi-arrow-counterclockwise" />
+                </Button>
               </Col>
               <Col>
-                <i className="bi bi-play"></i>
+                <Button variant="outline-dark">
+                  <i className="bi bi-play" />
+                </Button>
               </Col>
               <Col>
-                <i className="bi bi-arrow-clockwise" />
+                <Button variant="outline-dark">
+                  <i className="bi bi-arrow-clockwise" />
+                </Button>
               </Col>
               <Col>
-                <i className="bi bi-skip-forward"></i>
+                <Button variant="outline-dark">
+                  <i className="bi bi-skip-forward" />
+                </Button>
               </Col>
             </Row>
             <Row className="mt-2">
