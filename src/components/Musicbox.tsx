@@ -3,13 +3,13 @@ import {
   Card,
   Col,
   Row,
-  ProgressBar,
   Button,
-  ButtonGroup,
 } from "react-bootstrap";
 
 const Musicbox = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const togglePlayPause = () => {
@@ -21,7 +21,23 @@ const Musicbox = () => {
         audio.play();
       }
       setIsPlaying(!isPlaying);
+      setCurrentTime(audio.currentTime);
+      setDuration(audio.duration);
     }
+  };
+
+  const handleTimeUpdate = (
+    event: React.SyntheticEvent<HTMLAudioElement, Event>
+  ) => {
+    const audio = event.currentTarget;
+    setCurrentTime(audio.currentTime);
+  };
+
+  const handleLoadedMetadata = (
+    event: React.SyntheticEvent<HTMLAudioElement, Event>
+  ) => {
+    const audio = event.currentTarget;
+    setDuration(audio.duration);
   };
 
   return (
@@ -34,11 +50,11 @@ const Musicbox = () => {
               Mac Miller
             </Card.Subtitle>
             <div className="musicPlayerButton">
-              <ButtonGroup>
-                <Button>
+              <div>
+                <Button style={{ backgroundColor: "transparent" }}>
                   <i className="bi bi-skip-backward" />
                 </Button>
-                <Button>
+                <Button style={{ backgroundColor: "transparent" }}>
                   <i className="bi bi-arrow-counterclockwise" />
                 </Button>
                 <Button
@@ -52,23 +68,40 @@ const Musicbox = () => {
                     <i className="bi bi-play" />
                   )}
                 </Button>
-                <Button>
+                <Button style={{ backgroundColor: "transparent" }}>
                   <i className="bi bi-arrow-clockwise" />
                 </Button>
-                <Button>
+                <Button style={{ backgroundColor: "transparent" }}>
                   <i className="bi bi-skip-forward" />
                 </Button>
-              </ButtonGroup>
+              </div>
             </div>
             <div>
               <audio
                 ref={audioRef}
                 src="https://cdn.pixabay.com/download/audio/2022/03/25/audio_42b0dba7b5.mp3?filename=i-canx27t-fall-in-love-106865.mp3"
                 preload="metadata"
+                onTimeUpdate={handleTimeUpdate}
+                onLoadedMetadata={handleLoadedMetadata}
               />
-              <div className="currentTime">0:00</div>
-              <input type="range" className="progressBar" />
-              <div className="duration">2:49</div>
+              <div className="currentTime">
+                {new Date(currentTime * 1000).toISOString().substr(14, 5)}
+              </div>
+              <input
+                type="range"
+                className="progressBar"
+                value={currentTime}
+                max={duration}
+                onChange={(event) => {
+                  const audio = audioRef.current;
+                  if (audio) {
+                    audio.currentTime = Number(event.target.value);
+                  }
+                }}
+              />
+              <div className="duration">
+                {new Date(duration * 1000).toISOString().substr(14, 5)}
+              </div>
             </div>
           </Card.Body>
         </Col>
