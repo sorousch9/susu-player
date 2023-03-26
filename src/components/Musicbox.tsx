@@ -3,6 +3,9 @@ import { Card, Col, Row, ProgressBar, Button } from "react-bootstrap";
 
 const Musicbox = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
+  };
   return (
     <Card>
       <Row>
@@ -24,15 +27,13 @@ const Musicbox = () => {
                 </Button>
               </Col>
               <Col>
-                {isPlaying ? (
-                  <Button variant="outline-dark">
+                <Button variant="outline-dark" onClick={togglePlayPause}>
+                  {isPlaying ? (
                     <i className="bi bi-pause" />
-                  </Button>
-                ) : (
-                  <Button variant="outline-dark">
+                  ) : (
                     <i className="bi bi-play" />
-                  </Button>
-                )}
+                  )}
+                </Button>
               </Col>
               <Col>
                 <Button variant="outline-dark">
