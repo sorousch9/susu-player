@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Card, Col, Row, ProgressBar, Button } from "react-bootstrap";
 
 const Musicbox = () => {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   return (
     <Card>
       <Row>
@@ -22,9 +24,15 @@ const Musicbox = () => {
                 </Button>
               </Col>
               <Col>
-                <Button variant="outline-dark">
-                  <i className="bi bi-play" />
-                </Button>
+                {isPlaying ? (
+                  <Button variant="outline-dark">
+                    <i className="bi bi-pause" />
+                  </Button>
+                ) : (
+                  <Button variant="outline-dark">
+                    <i className="bi bi-play" />
+                  </Button>
+                )}
               </Col>
               <Col>
                 <Button variant="outline-dark">
