@@ -10,12 +10,12 @@ type Props = {
   windowWidth: number;
 };
 
-export const Player = ({
+export const Player: React.FC<Props> = ({
   musics,
   id,
   setId,
   setIsFull,
-  isFull,
+  isFull = false,
   windowWidth,
 }: Props) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
@@ -47,25 +47,24 @@ export const Player = ({
           }
         }, 1000);
 
-        setInterval(() => {
-          if (duration > 0 || duration !== undefined) {
-            clearInterval(interval);
-
-            if (
-              audioTag.current &&
-              audioTag.current.currentTime === audioTag.current.duration
-            ) {
-              isRandom ? skipRandom() : skipForward();
-            }
-          }
-        }, 1100);
+        return () => clearInterval(interval);
       } else {
         audioTag.current.pause();
         audioTag.current.volume = +volume;
         cancelAnimationFrame(animationRef.current);
       }
     }
-  }, [[], isRandom]);
+  }, [
+    id,
+    isPlaying,
+    isMuted,
+    volume,
+    isFull,
+    windowWidth,
+    musics,
+    setId,
+    audioTag,
+  ]);
 
   const calculateDuration = (sec: number) => {
     const minutes = Math.floor(sec / 60);
@@ -134,7 +133,7 @@ export const Player = ({
     <div className="playerContainer">
       <div className="musicDiv">
         {musics.map((music) =>
-          +id === music.id ? (
+          id === music.id ? (
             <div
               onClick={() => setIsFull(windowWidth <= 820 && !isFull)}
               className="music"

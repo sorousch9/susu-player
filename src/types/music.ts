@@ -1,5 +1,5 @@
 export interface MusicType {
-  id: number;
+  id: string;
   album_img: string;
   name: string;
   author: string;

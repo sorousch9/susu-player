@@ -1,3 +1,5 @@
+import { Card, Col, Row } from "react-bootstrap";
+
 type Props = {
   img: string;
   name: string;
@@ -5,6 +7,7 @@ type Props = {
   audio: string;
   id: string;
   isFull: boolean;
+  musicId: string;
   genre: string;
   windowWidth: number;
   setId: (e: string) => void;
@@ -16,6 +19,7 @@ export const List = ({
   name,
   author,
   audio,
+  musicId,
   isFull,
   id,
   genre,
@@ -23,17 +27,15 @@ export const List = ({
   setId,
 }: Props) => {
   return (
-    <div className="playList">
-      <div className="divAll">
-        <div className="containerFull">
-          <div className="divFull">
-            <img src={img} alt={name} />
-            <h4>{name}</h4>
-            <h3>{author}</h3>
-            <audio src={audio} />
-          </div>
-        </div>
-      </div>
-    </div>
+    <Row>
+      <Col>
+        <Card onClick={() => setId(musicId)}>
+          <Card.Img src={img} alt={name} />
+          <Card.Title>{name}</Card.Title>
+          <Card.Subtitle>{author}</Card.Subtitle>
+          <audio src={audio} />
+        </Card>
+      </Col>
+    </Row>
   );
 };
