@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { musics } from "../data";
+import { MusicType } from "../types/music";
 
 type Props = {
+  musics: MusicType[];
   id: string;
   isFull: boolean;
   setId: (e: string) => void;
@@ -9,7 +10,8 @@ type Props = {
   windowWidth: number;
 };
 
-export const Musicbox = ({
+export const Player = ({
+  musics,
   id,
   setId,
   setIsFull,
@@ -27,7 +29,7 @@ export const Musicbox = ({
   const animationRef = useRef<number>(0);
 
   useEffect(() => {
-    if (id !== "" && audioTag.current) {
+    if (musics.id !== undefined && audioTag.current) {
       if (isPlaying) {
         audioTag.current.play();
         animationRef.current = requestAnimationFrame(whilePlaying);
@@ -42,9 +44,6 @@ export const Musicbox = ({
           if (audioTag.current && audioTag.current.duration) {
             const seconds = Math.floor(audioTag.current.duration);
             setDuration(seconds);
-            if (progressBar.current && (windowWidth >= 830 || isFull)) {
-              progressBar.current.max = seconds.toString();
-            }
           }
         }, 1000);
 
@@ -77,20 +76,6 @@ export const Musicbox = ({
     return `${newMinutes}:${newSeconds}`;
   };
 
-  const skipForward = () => {
-    if (id === "") {
-      alert("Choose a song!");
-    } else if (isRandom) {
-      skipRandom();
-    } else if (id === "9") {
-      setId("1");
-    } else {
-      const idNum = parseInt(id);
-      const newId = idNum + 1;
-      setId(newId.toString());
-    }
-  };
-
   const skipRandom = () => {
     const idNum = parseInt(id);
     const randomNum = Math.floor(Math.random() * 9);
@@ -103,7 +88,7 @@ export const Musicbox = ({
   };
 
   const skipBack = () => {
-    if (id === "") {
+    if (id === undefined) {
       alert("Choose a song!");
     } else {
       const idNum = parseInt(id);
@@ -239,4 +224,4 @@ export const Musicbox = ({
   );
 };
 
-export default Musicbox;
+export default Player;

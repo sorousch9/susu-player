@@ -1,0 +1,76 @@
+{
+    "musics": [
+        {
+            "id": "1",
+            "name": "Smoke",
+            "author": "SoulProdMusic",
+            "genre": "Beats",
+            "audio": "https://cdn.pixabay.com/audio/2023/03/19/audio_9311bc02e5.mp3",
+            "album_img": "https://cdn.pixabay.com/audio/2023/03/19/12-27-22-207_200x200.jpg"
+        },
+        {
+            "id": "2",
+            "name": "The Blackest Bouquet",
+            "author": "Leonell Cassio",
+            "genre": "Ambient",
+            "audio": "https://cdn.pixabay.com/audio/2022/08/31/audio_419263fc12.mp3",
+            "album_img": "https://cdn.pixabay.com/audio/2022/08/31/19-48-37-847_200x200.jpg"
+        },
+        {
+            "id": "3",
+            "name": "AlexiAction",
+            "author": "FASSounds",
+            "genre": "Beats",
+            "audio": "https://cdn.pixabay.com/audio/2022/11/22/audio_febc508520.mp3",
+            "album_img": "https://cdn.pixabay.com/audio/2022/11/22/06-30-38-127_200x200.jpg"
+        },
+        {
+            "id": "4",
+            "name": "Password Infinity",
+            "author": "Evgeny_Bardyuzha",
+            "genre": "Eletronic",
+            "audio": "https://cdn.pixabay.com/audio/2022/10/18/audio_31c2730e64.mp3",
+            "album_img": "https://cdn.pixabay.com/audio/2022/10/18/12-55-08-891_200x200.jpg"
+        },
+        {
+            "id": "5",
+            "name": "Acoustic",
+            "author": "Coma-Media",
+            "genre": "Ambient",
+            "audio": "https://cdn.pixabay.com/audio/2023/02/28/audio_efe9af57dd.mp3",
+            "album_img": "https://cdn.pixabay.com/audio/2023/03/02/13-19-35-144_200x200.jpg"
+        },
+        {
+            "id": "6",
+            "name": "Acoustic Folk Music Guitar",
+            "author": "BArtMusic",
+            "genre": "Ambient",
+            "audio": "https://cdn.pixabay.com/audio/2023/03/03/audio_a7b60369f0.mp3",
+            "album_img": "https://cdn.pixabay.com/audio/2023/03/14/00-19-33-916_200x200.jpg"
+        },
+        {
+            "id": "7",
+            "name": "Spirit Blossom",
+            "author": "RomanBelov",
+            "genre": "Beats",
+            "audio": "https://cdn.pixabay.com/audio/2022/01/17/audio_75d3062d06.mp3",
+            "album_img": "https://cdn.pixabay.com/audio/2023/03/03/09-33-24-815_200x200.jpg"
+        },
+        {
+            "id": "8",
+            "name": "Dark Mystery",
+            "author": "AlexGrohl",
+            "genre": "Classic",
+            "audio": "https://cdn.pixabay.com/audio/2023/01/23/audio_384c4a93a5.mp3",
+            "album_img": "https://cdn.pixabay.com/audio/2022/12/29/19-57-46-594_200x200.jpg"
+        },
+        {
+            "id": "9",
+            "name": "I Will Be Here",
+            "author": "FASSounds",
+            "genre": "Classic",
+            "audio": "https://cdn.pixabay.com/audio/2023/02/28/audio_6ac645b203.mp3",
+            "album_img": "https://cdn.pixabay.com/audio/2023/02/28/04-12-55-518_200x200.jpg"
+        }
+    ]
+}
