@@ -1,119 +1,241 @@
-import { useState, useRef } from "react";
-import {
-  Card,
-  Col,
-  Row,
-  Button,
-} from "react-bootstrap";
+import { useEffect, useRef, useState } from "react";
+import { musics } from "../data";
 
-const Musicbox = () => {
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [currentTime, setCurrentTime] = useState<number>(0);
+type Props = {
+  id: string;
+  isFull: boolean;
+  setId: (e: string) => void;
+  setIsFull: (e: boolean) => void;
+  windowWidth: number;
+};
+
+export const Musicbox = ({
+  id,
+  setId,
+  setIsFull,
+  isFull,
+  windowWidth,
+}: Props) => {
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [volume, setVolume] = useState<string>("1");
   const [duration, setDuration] = useState<number>(0);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isRandom, setIsRandom] = useState<boolean>(false);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [isMuted, setIsMuted] = useState<boolean>(false);
+  const audioTag = useRef<HTMLAudioElement>(null);
+  const progressBar = useRef<HTMLInputElement>(null);
+  const animationRef = useRef<number>(0);
 
-  const togglePlayPause = () => {
-    const audio = audioRef.current;
-    if (audio) {
+  useEffect(() => {
+    if (id !== "" && audioTag.current) {
       if (isPlaying) {
-        audio.pause();
+        audioTag.current.play();
+        animationRef.current = requestAnimationFrame(whilePlaying);
+
+        audioTag.current.volume = +volume;
+
+        if (isMuted) {
+          audioTag.current.muted = true;
+        } else audioTag.current.muted = false;
+
+        const interval = setInterval(() => {
+          if (audioTag.current && audioTag.current.duration) {
+            const seconds = Math.floor(audioTag.current.duration);
+            setDuration(seconds);
+            if (progressBar.current && (windowWidth >= 830 || isFull)) {
+              progressBar.current.max = seconds.toString();
+            }
+          }
+        }, 1000);
+
+        setInterval(() => {
+          if (duration > 0 || duration !== undefined) {
+            clearInterval(interval);
+
+            if (
+              audioTag.current &&
+              audioTag.current.currentTime === audioTag.current.duration
+            ) {
+              isRandom ? skipRandom() : skipForward();
+            }
+          }
+        }, 1100);
       } else {
-        audio.play();
+        audioTag.current.pause();
+        audioTag.current.volume = +volume;
+        cancelAnimationFrame(animationRef.current);
       }
-      setIsPlaying(!isPlaying);
-      setCurrentTime(audio.currentTime);
-      setDuration(audio.duration);
+    }
+  }, [[], isRandom]);
+
+  const calculateDuration = (sec: number) => {
+    const minutes = Math.floor(sec / 60);
+    const newMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const seconds = Math.floor(sec % 60);
+    const newSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+    return `${newMinutes}:${newSeconds}`;
+  };
+
+  const skipForward = () => {
+    if (id === "") {
+      alert("Choose a song!");
+    } else if (isRandom) {
+      skipRandom();
+    } else if (id === "9") {
+      setId("1");
+    } else {
+      const idNum = parseInt(id);
+      const newId = idNum + 1;
+      setId(newId.toString());
     }
   };
 
-  const handleTimeUpdate = (
-    event: React.SyntheticEvent<HTMLAudioElement, Event>
-  ) => {
-    const audio = event.currentTarget;
-    setCurrentTime(audio.currentTime);
+  const skipRandom = () => {
+    const idNum = parseInt(id);
+    const randomNum = Math.floor(Math.random() * 9);
+    if (randomNum === 0 || randomNum === idNum) {
+      const newNum = randomNum + 1;
+      setId(newNum.toString());
+    } else {
+      setId(randomNum.toString());
+    }
   };
 
-  const handleLoadedMetadata = (
-    event: React.SyntheticEvent<HTMLAudioElement, Event>
-  ) => {
-    const audio = event.currentTarget;
-    setDuration(audio.duration);
+  const skipBack = () => {
+    if (id === "") {
+      alert("Choose a song!");
+    } else {
+      const idNum = parseInt(id);
+      const newId = idNum - 1;
+      setId(newId.toString());
+    }
+  };
+
+  const whilePlaying = () => {
+    if (progressBar.current && audioTag.current) {
+      const { currentTime, duration } = audioTag.current;
+      progressBar.current.value = currentTime.toString();
+      setCurrentTime(currentTime);
+      if (windowWidth >= 830 || isFull) {
+        animationRef.current = requestAnimationFrame(whilePlaying);
+      }
+      if (currentTime >= duration) {
+        isRandom ? skipRandom() : skipForward();
+      }
+    }
+  };
+
+  const changeRange = () => {
+    if (progressBar.current && audioTag.current) {
+      audioTag.current.currentTime = parseFloat(progressBar.current.value);
+      setCurrentTime(parseFloat(progressBar.current.value));
+    }
   };
 
   return (
-    <Card>
-      <Row>
-        <Col xs={12} md={8}>
-          <Card.Body>
-            <Card.Title>Live From Space</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
-              Mac Miller
-            </Card.Subtitle>
-            <div className="musicPlayerButton">
-              <div>
-                <Button style={{ backgroundColor: "transparent" }}>
-                  <i className="bi bi-skip-backward" />
-                </Button>
-                <Button style={{ backgroundColor: "transparent" }}>
-                  <i className="bi bi-arrow-counterclockwise" />
-                </Button>
-                <Button
-                  variant="outline-dark"
-                  onClick={togglePlayPause}
-                  active={isPlaying}
-                >
-                  {isPlaying ? (
-                    <i className="bi bi-pause" />
-                  ) : (
-                    <i className="bi bi-play" />
-                  )}
-                </Button>
-                <Button style={{ backgroundColor: "transparent" }}>
-                  <i className="bi bi-arrow-clockwise" />
-                </Button>
-                <Button style={{ backgroundColor: "transparent" }}>
-                  <i className="bi bi-skip-forward" />
-                </Button>
-              </div>
+    <div className="playerContainer">
+      <div className="musicDiv">
+        {musics.map((music) =>
+          id === music.id ? (
+            <div
+              onClick={() => setIsFull(windowWidth <= 820 && !isFull)}
+              className="music"
+              key={music.id}
+            >
+              {!isFull ? (
+                <>
+                  <img src={music.album_img} />
+                  <div>
+                    <h1>{music.name}</h1>
+                    <h3>{music.author}</h3>
+                  </div>
+                </>
+              ) : (
+                ""
+              )}
+              <audio src={music.audio} ref={audioTag} />
             </div>
-            <div>
-              <audio
-                ref={audioRef}
-                src="https://cdn.pixabay.com/download/audio/2022/03/25/audio_42b0dba7b5.mp3?filename=i-canx27t-fall-in-love-106865.mp3"
-                preload="metadata"
-                onTimeUpdate={handleTimeUpdate}
-                onLoadedMetadata={handleLoadedMetadata}
-              />
-              <div className="currentTime">
-                {new Date(currentTime * 1000).toISOString().substr(14, 5)}
-              </div>
+          ) : (
+            ""
+          )
+        )}
+      </div>
+      <div className="player">
+        <div className="inputButtons">
+          {isFull || windowWidth >= 830 ? (
+            <div className="progressBar">
+              <p className="PcurrentTime">{calculateDuration(currentTime)}</p>
               <input
                 type="range"
-                className="progressBar"
-                value={currentTime}
-                max={duration}
-                onChange={(event) => {
-                  const audio = audioRef.current;
-                  if (audio) {
-                    audio.currentTime = Number(event.target.value);
-                  }
-                }}
+                className="currentProgress"
+                defaultValue="0"
+                ref={progressBar}
+                onChange={changeRange}
               />
-              <div className="duration">
-                {new Date(duration * 1000).toISOString().substr(14, 5)}
-              </div>
+
+              <p className="Pduration">
+                {duration && !isNaN(duration) && calculateDuration(duration)}
+              </p>
             </div>
-          </Card.Body>
-        </Col>
-        <Col xs={6} md={4}>
-          <Card.Img
-            src="https://cdn.pixabay.com/audio/2022/08/31/19-48-37-847_200x200.jpg"
-            alt="Live from space album cover"
-            style={{ width: "9rem" }}
+          ) : (
+            ""
+          )}
+          <div className="buttons">
+            {windowWidth >= 830 || isFull ? (
+              <button
+                onClick={() => setIsRandom(!isRandom)}
+                className="randomMusicsButton"
+              >
+                {isRandom ? (
+                  <i className="bi bi-shuffle" />
+                ) : (
+                  <i className="bi bi-shuffle" />
+                )}
+              </button>
+            ) : (
+              ""
+            )}
+            <button onClick={skipBack}>
+              <i className="bi bi-skip-backward" />
+            </button>
+            <button
+              className="playPause"
+              onClick={() => setIsPlaying(!isPlaying)}
+            >
+              {isPlaying ? (
+                <i className="bi bi-pause" />
+              ) : (
+                <i className="bi bi-play" />
+              )}
+            </button>
+            <button onClick={skipForward}>
+              <i className="bi bi-skip-forward" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {windowWidth > 825 && (
+        <div className="volumeC">
+          <button className="volumeButton" onClick={() => setIsMuted(!isMuted)}>
+            {isMuted ? (
+              <i className="bi bi-volume-mute" />
+            ) : (
+              <i className="bi bi-volume-up" />
+            )}
+          </button>
+          <input
+            type="range"
+            step="0.01"
+            onChange={(e) => setVolume(e.target.value)}
+            value={volume}
+            max="1"
+            min="0"
           />
-        </Col>
-      </Row>
-    </Card>
+        </div>
+      )}
+    </div>
   );
 };
 
