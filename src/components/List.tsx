@@ -6,15 +6,12 @@ type Props = {
   id: string;
   isFull: boolean;
   genre: string;
-  genres: string;
-  isSearch: boolean;
-  search: string;
   windowWidth: number;
   setId: (e: string) => void;
   setIsFull: (e: boolean) => void;
 };
 
-export const PlayList = ({
+export const List = ({
   img,
   name,
   author,
@@ -22,9 +19,6 @@ export const PlayList = ({
   isFull,
   id,
   genre,
-  genres,
-  isSearch,
-  search,
   windowWidth,
   setId,
 }: Props) => {

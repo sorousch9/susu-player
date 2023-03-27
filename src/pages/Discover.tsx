@@ -1,7 +1,6 @@
 import Player from "../components/Player";
 import { useEffect, useState } from "react";
-import "./App.css";
-import { PlayList } from "../components/PlayList";
+import { List } from "../components/List";
 import axios from "axios";
 import { MusicType } from "../types/music";
 
@@ -36,7 +35,7 @@ const Discover = () => {
           <div className="divSongs">
             <div>
               {musics.map((music) => (
-                <PlayList
+                <List
                   key={music.id}
                   img={music.album_img}
                   name={music.name}

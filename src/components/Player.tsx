@@ -29,7 +29,7 @@ export const Player = ({
   const animationRef = useRef<number>(0);
 
   useEffect(() => {
-    if (musics.id !== undefined && audioTag.current) {
+    if (id !== "0" && audioTag.current) {
       if (isPlaying) {
         audioTag.current.play();
         animationRef.current = requestAnimationFrame(whilePlaying);
@@ -75,7 +75,19 @@ export const Player = ({
 
     return `${newMinutes}:${newSeconds}`;
   };
-
+  const skipForward = () => {
+    if (id === "") {
+      alert("Choose a song!");
+    } else if (isRandom) {
+      skipRandom();
+    } else if (id === "9") {
+      setId("1");
+    } else {
+      const idNum = parseInt(id);
+      const newId = idNum + 1;
+      setId(newId.toString());
+    }
+  };
   const skipRandom = () => {
     const idNum = parseInt(id);
     const randomNum = Math.floor(Math.random() * 9);
@@ -122,7 +134,7 @@ export const Player = ({
     <div className="playerContainer">
       <div className="musicDiv">
         {musics.map((music) =>
-          id === music.id ? (
+          +id === music.id ? (
             <div
               onClick={() => setIsFull(windowWidth <= 820 && !isFull)}
               className="music"
@@ -130,7 +142,7 @@ export const Player = ({
             >
               {!isFull ? (
                 <>
-                  <img src={music.album_img} />
+                  <img src={music.album_img} alt={music.name} />
                   <div>
                     <h1>{music.name}</h1>
                     <h3>{music.author}</h3>
