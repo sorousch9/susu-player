@@ -8,9 +8,6 @@ import { Col, Container, Row } from "react-bootstrap";
 const Discover = () => {
   const [musics, setMusics] = useState<MusicType[]>([]);
   const [id, setId] = useState<string>("");
-  const [isFull, setIsFull] = useState<boolean>(false);
-  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
-
   useEffect(() => {
     const fetchDataAsync = async () => {
       const response = await axios.get<MusicType[]>(
@@ -18,24 +15,17 @@ const Discover = () => {
       );
       if (response !== undefined) {
         setMusics(response.data);
-        console.log(response.data);
       }
     };
     fetchDataAsync();
   }, []);
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setWindowWidth(window.innerWidth);
-    });
-  }, []);
+
   return (
     <Container>
-   
       <Row>
         {musics.map((music) => (
-          <Col md={3}>
+          <Col md={3} key={music.id}>
             <List
-              key={music.id}
               img={music.album_img}
               name={music.name}
               author={music.author}
@@ -43,10 +33,8 @@ const Discover = () => {
               genre={music.genre}
               setId={setId}
               id={id}
-              setIsFull={setIsFull}
-              isFull={isFull}
               musicId={music.id}
-              windowWidth={windowWidth}
+           
             />
           </Col>
         ))}
@@ -56,9 +44,6 @@ const Discover = () => {
           musics={musics}
           id={id}
           setId={setId}
-          setIsFull={setIsFull}
-          isFull={isFull}
-          windowWidth={windowWidth}
         />
       </Row>
     </Container>

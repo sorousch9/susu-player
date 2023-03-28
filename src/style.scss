@@ -1,8 +1,11 @@
 @import "~bootstrap/scss/bootstrap";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 $font-family_1: monospace;
+$app-backgraound_1: #1c1c1c;
+$app-backgraound_2: #222222;
 $background-color_1: #8d8d8d;
 $background-color_2: #abd485;
+$text-color:#ededed;
 $selected: #5f9a27;
 $seek-before-width: 20;
 $bar-bg: #d8d8d8;
@@ -14,8 +17,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #d3d3d3;
-  color: #131313;
+  background-color: $app-backgraound_1;
+  color: $text-color;
   box-sizing: border-box;
 }
 
@@ -33,23 +36,14 @@ a {
 
 .playerContainer {
   display: flex;
-  background-color: #bbbbbb;
+  background-color: $app-backgraound_2;
   width: 100%;
   height: 14vh;
-  position: fixed;
   z-index: 1;
   align-items: center;
-
-  box-shadow: 0px -1px 7px #b0b0b0a0;
-
-  .musicDiv {
-    width: 400px;
-    margin-top: 5px;
-    cursor: pointer;
-  }
+  box-shadow: 0px 1px 2px #b0b0b0a0;
 
   .volumeC {
-    width: 400px;
     display: flex;
     align-items: center;
     justify-content: end;
@@ -57,7 +51,6 @@ a {
     input {
       appearance: none;
       border-radius: 10px;
-      width: 120px;
       background-color: #494a4d;
       height: 5px;
       outline: none;
@@ -80,28 +73,26 @@ a {
   .playPause {
     margin: 0 5px;
   }
-  .music {
+  .musicBanner {
     display: flex;
     color: #fff;
     align-items: center;
-    margin-left: 5px;
-
-    h1 {
-      font-size: 18px;
-      margin-bottom: 2px;
-    }
-    h3 {
-      margin-top: 0px;
-      font-size: 14px;
-      color: #b5b5b5;
-    }
-
-    div {
-      margin-left: 8px;
-    }
+    height: 100%;
     img {
-      width: 70px;
-      height: 65px;
+      width: 100px;
+    }
+    .musicBannerContent {
+      display: flex;
+      flex-direction: row;
+      span {
+        font-size: 18px;
+        margin-bottom: 2px;
+      }
+      p {
+        margin-top: 0px;
+        font-size: 14px;
+        color: #b5b5b5;
+      }
     }
   }
 
@@ -109,7 +100,6 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     margin: auto;
 
     button {

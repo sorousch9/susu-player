@@ -1,22 +1,17 @@
 import { useEffect, useRef, useState } from "react";
+import { Card, Col, Container, Image, Row } from "react-bootstrap";
 import { MusicType } from "../types/music";
 
 type Props = {
   musics: MusicType[];
   id: string;
-  isFull: boolean;
   setId: (e: string) => void;
-  setIsFull: (e: boolean) => void;
-  windowWidth: number;
 };
 
 export const Player: React.FC<Props> = ({
   musics,
   id,
   setId,
-  setIsFull,
-  isFull = false,
-  windowWidth,
 }: Props) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [volume, setVolume] = useState<string>("1");
@@ -59,8 +54,6 @@ export const Player: React.FC<Props> = ({
     isPlaying,
     isMuted,
     volume,
-    isFull,
-    windowWidth,
     musics,
     setId,
     audioTag,
@@ -113,9 +106,9 @@ export const Player: React.FC<Props> = ({
       const { currentTime, duration } = audioTag.current;
       progressBar.current.value = currentTime.toString();
       setCurrentTime(currentTime);
-      if (windowWidth >= 830 || isFull) {
+     
         animationRef.current = requestAnimationFrame(whilePlaying);
-      }
+     
       if (currentTime >= duration) {
         isRandom ? skipRandom() : skipForward();
       }
@@ -130,36 +123,24 @@ export const Player: React.FC<Props> = ({
   };
 
   return (
-    <div className="playerContainer">
-      <div className="musicDiv">
+    <Container className="playerContainer">
+      <Row>
         {musics.map((music) =>
           id === music.id ? (
-            <div
-              onClick={() => setIsFull(windowWidth <= 820 && !isFull)}
-              className="music"
-              key={music.id}
-            >
-              {!isFull ? (
-                <>
-                  <img src={music.album_img} alt={music.name} />
-                  <div>
-                    <h1>{music.name}</h1>
-                    <h3>{music.author}</h3>
-                  </div>
-                </>
-              ) : (
-                ""
-              )}
+            <Col md={4} key={music.id}>
+              <div className="musicBanner">
+                <Image src={music.album_img} alt={music.name} />
+                <div className="musicBannerContent">
+                  <span>{music.name}</span>
+                  <p>{music.author}</p>
+                </div>
+              </div>
               <audio src={music.audio} ref={audioTag} />
-            </div>
-          ) : (
-            ""
-          )
+            </Col>
+          ) : null
         )}
-      </div>
-      <div className="player">
-        <div className="inputButtons">
-          {isFull || windowWidth >= 830 ? (
+        <Col className="player" md={8}>
+          <div className="inputButtons">
             <div className="progressBar">
               <p className="PcurrentTime">{calculateDuration(currentTime)}</p>
               <input
@@ -169,16 +150,11 @@ export const Player: React.FC<Props> = ({
                 ref={progressBar}
                 onChange={changeRange}
               />
-
               <p className="Pduration">
                 {duration && !isNaN(duration) && calculateDuration(duration)}
               </p>
             </div>
-          ) : (
-            ""
-          )}
-          <div className="buttons">
-            {windowWidth >= 830 || isFull ? (
+            <div className="buttons">
               <button
                 onClick={() => setIsRandom(!isRandom)}
                 className="randomMusicsButton"
@@ -189,49 +165,48 @@ export const Player: React.FC<Props> = ({
                   <i className="bi bi-shuffle" />
                 )}
               </button>
-            ) : (
-              ""
-            )}
-            <button onClick={skipBack}>
-              <i className="bi bi-skip-backward" />
-            </button>
+
+              <button onClick={skipBack}>
+                <i className="bi bi-skip-backward" />
+              </button>
+              <button
+                className="playPause"
+                onClick={() => setIsPlaying(!isPlaying)}
+              >
+                {isPlaying ? (
+                  <i className="bi bi-pause" />
+                ) : (
+                  <i className="bi bi-play" />
+                )}
+              </button>
+              <button onClick={skipForward}>
+                <i className="bi bi-skip-forward" />
+              </button>
+            </div>
+          </div>
+          <div className="volumeC">
             <button
-              className="playPause"
-              onClick={() => setIsPlaying(!isPlaying)}
+              className="volumeButton"
+              onClick={() => setIsMuted(!isMuted)}
             >
-              {isPlaying ? (
-                <i className="bi bi-pause" />
+              {isMuted ? (
+                <i className="bi bi-volume-mute" />
               ) : (
-                <i className="bi bi-play" />
+                <i className="bi bi-volume-up" />
               )}
             </button>
-            <button onClick={skipForward}>
-              <i className="bi bi-skip-forward" />
-            </button>
+            <input
+              type="range"
+              step="0.01"
+              onChange={(e) => setVolume(e.target.value)}
+              value={volume}
+              max="1"
+              min="0"
+            />
           </div>
-        </div>
-      </div>
-
-      {windowWidth > 825 && (
-        <div className="volumeC">
-          <button className="volumeButton" onClick={() => setIsMuted(!isMuted)}>
-            {isMuted ? (
-              <i className="bi bi-volume-mute" />
-            ) : (
-              <i className="bi bi-volume-up" />
-            )}
-          </button>
-          <input
-            type="range"
-            step="0.01"
-            onChange={(e) => setVolume(e.target.value)}
-            value={volume}
-            max="1"
-            min="0"
-          />
-        </div>
-      )}
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
