@@ -1,25 +1,13 @@
-import Player from "../components/Player";
-import { useEffect, useState } from "react";
 import { List } from "../components/List";
-import axios from "axios";
 import { MusicType } from "../types/music";
 import { Col, Container, Row } from "react-bootstrap";
-
-const Discover = () => {
-  const [musics, setMusics] = useState<MusicType[]>([]);
-  const [id, setId] = useState<string>("");
-  useEffect(() => {
-    const fetchDataAsync = async () => {
-      const response = await axios.get<MusicType[]>(
-        "http://localhost:3009/musics"
-      );
-      if (response !== undefined) {
-        setMusics(response.data);
-      }
-    };
-    fetchDataAsync();
-  }, []);
-
+interface Props {
+  setId: (e: string) => void;
+  id: string;
+  musics: MusicType[];
+  setMusics: (e: MusicType[]) => void;
+}
+const Discover = ({ id, setId, musics, setMusics }: Props) => {
   return (
     <Container>
       <Row>
@@ -34,17 +22,9 @@ const Discover = () => {
               setId={setId}
               id={id}
               musicId={music.id}
-           
             />
           </Col>
         ))}
-      </Row>
-      <Row>
-        <Player
-          musics={musics}
-          id={id}
-          setId={setId}
-        />
       </Row>
     </Container>
   );

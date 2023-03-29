@@ -5,7 +5,7 @@ $app-backgraound_1: #1c1c1c;
 $app-backgraound_2: #222222;
 $background-color_1: #8d8d8d;
 $background-color_2: #abd485;
-$text-color:#ededed;
+$text-color: #ededed;
 $selected: #5f9a27;
 $seek-before-width: 20;
 $bar-bg: #d8d8d8;
@@ -33,7 +33,17 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
+.sidebar-wrapper {
+  padding-left: 0rem;
+}
+.sidebar {
+  background-color: $app-backgraound_2;
+  height: 100%;
+  width: 100%;
+  .text {
+    color: $text-color;
+  }
+}
 .playerContainer {
   display: flex;
   background-color: $app-backgraound_2;
