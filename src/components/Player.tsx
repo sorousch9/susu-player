@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Card, Col, Container, Image, Row } from "react-bootstrap";
+import { Routes } from "react-router-dom";
 import { MusicType } from "../types/music";
 
 type Props = {
@@ -8,11 +9,7 @@ type Props = {
   setId: (e: string) => void;
 };
 
-export const Player: React.FC<Props> = ({
-  musics,
-  id,
-  setId,
-}: Props) => {
+export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [volume, setVolume] = useState<string>("1");
   const [duration, setDuration] = useState<number>(0);
@@ -49,15 +46,7 @@ export const Player: React.FC<Props> = ({
         cancelAnimationFrame(animationRef.current);
       }
     }
-  }, [
-    id,
-    isPlaying,
-    isMuted,
-    volume,
-    musics,
-    setId,
-    audioTag,
-  ]);
+  }, [id, isPlaying, isMuted, volume, musics, setId, audioTag]);
 
   const calculateDuration = (sec: number) => {
     const minutes = Math.floor(sec / 60);
@@ -106,9 +95,9 @@ export const Player: React.FC<Props> = ({
       const { currentTime, duration } = audioTag.current;
       progressBar.current.value = currentTime.toString();
       setCurrentTime(currentTime);
-     
-        animationRef.current = requestAnimationFrame(whilePlaying);
-     
+
+      animationRef.current = requestAnimationFrame(whilePlaying);
+
       if (currentTime >= duration) {
         isRandom ? skipRandom() : skipForward();
       }
@@ -123,8 +112,8 @@ export const Player: React.FC<Props> = ({
   };
 
   return (
-    <Container className="playerContainer" >
-      <Row >
+    <Container className="playerContainer">
+      <Row>
         {musics.map((music) =>
           id === music.id ? (
             <Col md={4} key={music.id}>
@@ -162,25 +151,26 @@ export const Player: React.FC<Props> = ({
                 {isRandom ? (
                   <i className="bi bi-shuffle" />
                 ) : (
-                  <i className="bi bi-shuffle" />
+                  <i className="bi bi-shuffle" style={{color:"#ff0000"}}/>
                 )}
               </button>
 
-              <button onClick={skipBack}>
-                <i className="bi bi-skip-backward" />
+              <button onClick={skipBack} style={{ rotate: "180deg" }}>
+                <i className="bi bi-fast-forward-fill" />
               </button>
               <button
                 className="playPause"
+                style={{ fontSize: "2.5rem" }}
                 onClick={() => setIsPlaying(!isPlaying)}
               >
                 {isPlaying ? (
-                  <i className="bi bi-pause" />
+                  <i className="bi bi-pause-fill" />
                 ) : (
-                  <i className="bi bi-play" />
+                  <i className=" bi-play-fill" />
                 )}
               </button>
               <button onClick={skipForward}>
-                <i className="bi bi-skip-forward" />
+                <i className="bi bi-fast-forward-fill" />
               </button>
             </div>
           </div>

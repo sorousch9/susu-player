@@ -151,6 +151,7 @@ a {
           right: 25px;
           i {
             color: $text-color;
+            font-size: 1.4rem;
           }
         }
         .playPause {
@@ -163,6 +164,8 @@ a {
           background-color: transparent;
           cursor: pointer;
           color: $text-color;
+          font-size: 1.4rem;
+     
         }
       }
     }
@@ -193,6 +196,7 @@ a {
         cursor: pointer;
         i {
           color: $text-color;
+          font-size: 1.4rem;
         }
       }
     }
