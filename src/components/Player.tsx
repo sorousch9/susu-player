@@ -123,8 +123,8 @@ export const Player: React.FC<Props> = ({
   };
 
   return (
-    <Container className="playerContainer">
-      <Row>
+    <Container className="playerContainer" >
+      <Row >
         {musics.map((music) =>
           id === music.id ? (
             <Col md={4} key={music.id}>
