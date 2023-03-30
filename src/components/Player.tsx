@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Card, Col, Container, Image, Row } from "react-bootstrap";
-import { Routes } from "react-router-dom";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import { MusicType } from "../types/music";
 
 type Props = {
@@ -112,11 +111,11 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
   };
 
   return (
-    <Container className="playerContainer">
-      <Row>
+    <Container fluid>
+      <Row className="playerContainer">
         {musics.map((music) =>
           id === music.id ? (
-            <Col md={4} key={music.id}>
+            <Col key={music.id} >
               <div className="musicBanner">
                 <Image src={music.album_img} alt={music.name} />
                 <div className="musicBannerContent">
@@ -128,30 +127,17 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
             </Col>
           ) : null
         )}
-        <Col className="player" md={8}>
+        <Col className="player" >
           <div className="inputButtons">
-            <div className="progressBar">
-              <p className="PcurrentTime">{calculateDuration(currentTime)}</p>
-              <input
-                type="range"
-                className="currentProgress"
-                defaultValue="0"
-                ref={progressBar}
-                onChange={changeRange}
-              />
-              <p className="Pduration">
-                {duration && !isNaN(duration) && calculateDuration(duration)}
-              </p>
-            </div>
             <div className="buttons">
               <button
                 onClick={() => setIsRandom(!isRandom)}
                 className="randomMusicsButton"
               >
                 {isRandom ? (
-                  <i className="bi bi-shuffle" />
-                ) : (
                   <i className="bi bi-shuffle" style={{ color: "#ff0000" }} />
+                ) : (
+                  <i className="bi bi-shuffle" />
                 )}
               </button>
 
@@ -173,27 +159,39 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
                 <i className="bi bi-fast-forward-fill" />
               </button>
             </div>
+            <div className="progressBar">
+              <span className="PcurrentTime">
+                {calculateDuration(currentTime)}
+              </span>
+              <input
+                type="range"
+                className="currentProgress"
+                defaultValue="0"
+                ref={progressBar}
+                onChange={changeRange}
+              />
+              <span className="Pduration">
+                {duration && !isNaN(duration) && calculateDuration(duration)}
+              </span>
+            </div>
           </div>
-          <div className="volumeC">
-            <button
-              className="volumeButton"
-              onClick={() => setIsMuted(!isMuted)}
-            >
-              {isMuted ? (
-                <i className="bi bi-volume-mute" />
-              ) : (
-                <i className="bi bi-volume-up" />
-              )}
-            </button>
-            <input
-              type="range"
-              step="0.01"
-              onChange={(e) => setVolume(e.target.value)}
-              value={volume}
-              max="1"
-              min="0"
-            />
-          </div>
+        </Col>
+        <Col className="volumeC" >
+          <button className="volumeButton buttons" onClick={() => setIsMuted(!isMuted)}>
+            {isMuted ? (
+              <i className="bi bi-volume-mute" />
+            ) : (
+              <i className="bi bi-volume-up" />
+            )}
+          </button>
+          <input
+            type="range"
+            step="0.01"
+            onChange={(e) => setVolume(e.target.value)}
+            value={volume}
+            max="1"
+            min="0"
+          />
         </Col>
       </Row>
     </Container>

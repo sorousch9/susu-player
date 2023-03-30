@@ -9,10 +9,10 @@ const Sidebar = () => {
   };
 
   return (
-    <Navbar className="sidebar" expand="md">
+    <Navbar className="sidebar" expand="md" variant="dark">
       <Navbar.Toggle onClick={handleToggle} />
       <Navbar.Collapse className={expanded ? "show" : ""}>
-        <Nav className="flex-column ">
+        <Nav className="flex-column">
           <Nav.Link className="text" href="#">
             Link 1
           </Nav.Link>
