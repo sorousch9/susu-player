@@ -45,7 +45,7 @@ function App() {
             </Routes>
           </Col>
         </Row>
-        <Row>
+        <Row className="player-wrapper">
           <Player musics={musics} id={id} setId={setId} />
         </Row>
       </Container>
