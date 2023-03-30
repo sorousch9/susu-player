@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Player from "./components/Player";
 import { MusicType } from "./types/music";
 import axios from "axios";
+import Header from "./components/Header";
 function App() {
   const [id, setId] = useState<string>("");
   const [musics, setMusics] = useState<MusicType[]>([]);
@@ -25,6 +26,9 @@ function App() {
   return (
     <BrowserRouter>
       <Container fluid>
+        <Row>
+          <Header />
+        </Row>
         <Row>
           <Col md={3} xl={2} className="sidebar-wrapper">
             <Sidebar />

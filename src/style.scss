@@ -36,6 +36,71 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.header {
+  background-color: $app-back_3;
+  border-bottom: 1px solid $borderB;
+  .logo {
+    font-size: 1.4rem;
+  }
+  .header-nav {
+    display: flex;
+    justify-content: space-between;
+    .search-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      border: 0.7px solid $borderB;
+      border-radius: 1rem;
+      input {
+        padding: 0.5rem 2rem 0.5rem 0.5rem;
+        border: none;
+        background-color: transparent;
+        font-size: 1rem;
+        color: $text-color;
+        min-width: 22rem;
+        outline: none;
+        @media (max-width: 768px) {
+          min-width: 10rem;
+        }
+
+        &::placeholder {
+          color: #999;
+        }
+      }
+      .search-icon {
+        padding-left: 0.5rem;
+        color: #999;
+        font-size: 1.7rem;
+      }
+    }
+    button {
+      background-color: transparent;
+      border: transparent;
+
+      &:active {
+        background-color: $selected;
+      }
+    }
+    .navbar-nav {
+      .nav-item {
+        background-color: #363636be;
+        padding: 0rem 0.5rem;
+        border-radius: 50%;
+        .nav-dropD{
+          background-color: #abd485;
+        }
+        a {
+          padding: 0rem;
+          color: #999;
+          font-size: 1.8rem;
+          &::before {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+}
 .sidebar-wrapper {
   padding-left: 0rem;
   background-color: $app-back_3;
