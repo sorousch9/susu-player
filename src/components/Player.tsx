@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { MusicType } from "../types/music";
 
@@ -19,45 +19,20 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
   const progressBar = useRef<HTMLInputElement>(null);
   const animationRef = useRef<number>(0);
 
-  useEffect(() => {
-    if (id !== "0" && audioTag.current) {
-      if (isPlaying) {
-        audioTag.current.play();
-        animationRef.current = requestAnimationFrame(whilePlaying);
-
-        audioTag.current.volume = +volume;
-
-        if (isMuted) {
-          audioTag.current.muted = true;
-        } else audioTag.current.muted = false;
-
-        const interval = setInterval(() => {
-          if (audioTag.current && audioTag.current.duration) {
-            const seconds = Math.floor(audioTag.current.duration);
-            setDuration(seconds);
-          }
-        }, 1000);
-
-        return () => clearInterval(interval);
-      } else {
-        audioTag.current.pause();
-        audioTag.current.volume = +volume;
-        cancelAnimationFrame(animationRef.current);
-      }
+  const skipRandom = useCallback(() => {
+    const idNum = parseInt(id);
+    const randomNum = Math.floor(Math.random() * 9);
+    if (randomNum === 0 || randomNum === idNum) {
+      const newNum = randomNum + 1;
+      setId(newNum.toString());
+    } else {
+      setId(randomNum.toString());
     }
-  }, [id, isPlaying, isMuted, volume, musics, setId, audioTag]);
+  }, [id, setId]);
 
-  const calculateDuration = (sec: number) => {
-    const minutes = Math.floor(sec / 60);
-    const newMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-    const seconds = Math.floor(sec % 60);
-    const newSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-
-    return `${newMinutes}:${newSeconds}`;
-  };
-  const skipForward = () => {
+  const skipForward = useCallback(() => {
     if (id === "") {
-      alert("Choose a song!");
+      setId("1")
     } else if (isRandom) {
       skipRandom();
     } else if (id === "9") {
@@ -67,29 +42,9 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
       const newId = idNum + 1;
       setId(newId.toString());
     }
-  };
-  const skipRandom = () => {
-    const idNum = parseInt(id);
-    const randomNum = Math.floor(Math.random() * 9);
-    if (randomNum === 0 || randomNum === idNum) {
-      const newNum = randomNum + 1;
-      setId(newNum.toString());
-    } else {
-      setId(randomNum.toString());
-    }
-  };
+  }, [id, isRandom, skipRandom, setId]);
 
-  const skipBack = () => {
-    if (id === undefined) {
-      alert("Choose a song!");
-    } else {
-      const idNum = parseInt(id);
-      const newId = idNum - 1;
-      setId(newId.toString());
-    }
-  };
-
-  const whilePlaying = () => {
+  const whilePlaying = useCallback(() => {
     if (progressBar.current && audioTag.current) {
       const { currentTime, duration } = audioTag.current;
       progressBar.current.value = currentTime.toString();
@@ -100,6 +55,33 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
       if (currentTime >= duration) {
         isRandom ? skipRandom() : skipForward();
       }
+    }
+  }, [
+    progressBar,
+    audioTag,
+    setCurrentTime,
+    animationRef,
+    isRandom,
+    skipRandom,
+    skipForward,
+  ]);
+
+  const calculateDuration = (sec: number) => {
+    const minutes = Math.floor(sec / 60);
+    const newMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const seconds = Math.floor(sec % 60);
+    const newSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+    return `${newMinutes}:${newSeconds}`;
+  };
+
+  const skipBack = () => {
+    if (id === undefined) {
+      alert("Choose a song!");
+    } else {
+      const idNum = parseInt(id);
+      const newId = idNum - 1;
+      setId(newId.toString());
     }
   };
 
@@ -134,6 +116,44 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
     }
   };
 
+  useEffect(() => {
+    const updateAudioProperties = () => {
+      if (audioTag.current) {
+        audioTag.current.volume = +volume;
+        audioTag.current.muted = isMuted;
+      }
+    };
+
+    if (id === "0" || !audioTag.current) {
+      return;
+    }
+
+    if (isPlaying) {
+      audioTag.current.play();
+      animationRef.current = requestAnimationFrame(whilePlaying);
+      const interval = setInterval(() => {
+        if (audioTag.current && audioTag.current.duration) {
+          const seconds = Math.floor(audioTag.current.duration);
+          setDuration(seconds);
+        }
+      }, 1000);
+      updateAudioProperties();
+      return () => clearInterval(interval);
+    }
+
+    audioTag.current.pause();
+    cancelAnimationFrame(animationRef.current);
+    updateAudioProperties();
+  }, [
+    id,
+    whilePlaying,
+    isPlaying,
+    isMuted,
+    volume,
+    musics,
+    audioTag,
+    progressBar,
+  ]);
   return (
     <Container fluid>
       <Row className="playerContainer">
