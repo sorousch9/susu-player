@@ -109,13 +109,37 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
       setCurrentTime(parseFloat(progressBar.current.value));
     }
   };
+  const skipForward10 = () => {
+    if (audioTag.current && audioTag.current.currentTime) {
+      const newTime = audioTag.current.currentTime + 10;
+      if (newTime > audioTag.current.duration) {
+        isRandom ? skipRandom() : skipForward();
+      } else {
+        audioTag.current.currentTime = newTime;
+        setCurrentTime(newTime);
+      }
+    }
+  };
+
+  const skipBack10 = () => {
+    if (audioTag.current && audioTag.current.currentTime) {
+      const newTime = audioTag.current.currentTime - 10;
+      if (newTime < 0) {
+        audioTag.current.currentTime = 0;
+        setCurrentTime(0);
+      } else {
+        audioTag.current.currentTime = newTime;
+        setCurrentTime(newTime);
+      }
+    }
+  };
 
   return (
     <Container fluid>
       <Row className="playerContainer">
         {musics.map((music) =>
           id === music.id ? (
-            <Col key={music.id} >
+            <Col key={music.id}>
               <div className="musicBanner">
                 <Image src={music.album_img} alt={music.name} />
                 <div className="musicBannerContent">
@@ -127,18 +151,12 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
             </Col>
           ) : null
         )}
-        <Col className="player" >
+        <Col className="player">
           <div className="inputButtons">
             <div className="buttons">
-              <button
-                onClick={() => setIsRandom(!isRandom)}
-                className="randomMusicsButton"
-              >
-                {isRandom ? (
-                  <i className="bi bi-shuffle" style={{ color: "#ff0000" }} />
-                ) : (
-                  <i className="bi bi-shuffle" />
-                )}
+              <button className="clockwise" onClick={skipBack10}>
+                10sec
+                <i className="bi bi-arrow-counterclockwise" />
               </button>
 
               <button onClick={skipBack} style={{ rotate: "180deg" }}>
@@ -158,6 +176,10 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
               <button onClick={skipForward}>
                 <i className="bi bi-fast-forward-fill" />
               </button>
+              <button className="clockwise" onClick={skipForward10}>
+                <i className="bi bi-arrow-clockwise" />
+                10sec
+              </button>
             </div>
             <div className="progressBar">
               <span className="PcurrentTime">
@@ -176,8 +198,21 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
             </div>
           </div>
         </Col>
-        <Col className="volumeC" >
-          <button className="volumeButton buttons" onClick={() => setIsMuted(!isMuted)}>
+        <Col className="volumeC">
+          <button
+            onClick={() => setIsRandom(!isRandom)}
+            className="randomMusicsButton"
+          >
+            {isRandom ? (
+              <i className="bi bi-shuffle" style={{ color: "#ff0000" }} />
+            ) : (
+              <i className="bi bi-shuffle" />
+            )}
+          </button>
+          <button
+            className="volumeButton buttons"
+            onClick={() => setIsMuted(!isMuted)}
+          >
             {isMuted ? (
               <i className="bi bi-volume-mute" />
             ) : (

@@ -160,7 +160,7 @@ a {
 
     img {
       width: 100px;
-      margin-right: .4rem;
+      margin-right: 0.4rem;
     }
     .musicBannerContent {
       display: flex;
@@ -238,11 +238,9 @@ a {
         display: flex;
         position: relative;
         bottom: 5;
-        .randomMusicsButton {
-          position: relative;
-          right: 25px;
+        .clockwise {
+          font-size: .6rem;
           i {
-            color: $text-color;
             font-size: 1.4rem;
           }
         }
@@ -265,7 +263,14 @@ a {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
+    .randomMusicsButton {
+      background-color: transparent;
+      border: none;
+      i {
+        color: $text-color;
+        font-size: 1.4rem;
+      }
+    }
     input {
       appearance: none;
       border-radius: 10px;
