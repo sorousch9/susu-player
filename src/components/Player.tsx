@@ -66,14 +66,15 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
     skipForward,
   ]);
 
-  const calculateDuration = (sec: number) => {
-    const minutes = Math.floor(sec / 60);
-    const newMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-    const seconds = Math.floor(sec % 60);
-    const newSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-
+  const calculateDuration = (sec: number): string => {
+    const minutes: number = Math.floor(sec / 60);
+    const newMinutes: string = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const seconds: number = Math.floor(sec % 60);
+    const newSeconds: string = seconds < 10 ? `0${seconds}` : `${seconds}`;
+  
     return `${newMinutes}:${newSeconds}`;
   };
+  
 
   const skipBack = () => {
     if (id === undefined) {
