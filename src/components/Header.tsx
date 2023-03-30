@@ -1,16 +1,7 @@
 import { useState } from "react";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-  Col,
-} from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-
+import logo from "../assets/logo.png";
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
 
@@ -22,7 +13,9 @@ const Header = () => {
     <Navbar className="header">
       <Container fluid>
         <Col md={3} xl={2} className="logo">
-          <NavLink to="/">Susu Player</NavLink>
+          <NavLink to="/">
+            <img src={logo} alt="logo" />
+          </NavLink>
         </Col>
         <Col md={9} xl={10} className="header-nav">
           <div className="search-container">
@@ -46,7 +39,7 @@ const Header = () => {
               className="nav-dropD"
             >
               <NavDropdown.Item href="#">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#">Settings</NavDropdown.Item>
+              <NavDropdown.Item href="#">Preferences</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#">Log out</NavDropdown.Item>
             </NavDropdown>
