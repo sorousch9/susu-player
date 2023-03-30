@@ -151,7 +151,7 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
                 {isRandom ? (
                   <i className="bi bi-shuffle" />
                 ) : (
-                  <i className="bi bi-shuffle" style={{color:"#ff0000"}}/>
+                  <i className="bi bi-shuffle" style={{ color: "#ff0000" }} />
                 )}
               </button>
 

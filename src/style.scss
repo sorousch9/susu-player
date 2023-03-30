@@ -36,11 +36,15 @@ a {
   color: inherit;
   text-decoration: none;
 }
+.discover {
+  margin-top: 5rem;
+}
 .header {
   background-color: $app-back_3;
   border-bottom: 1px solid $borderB;
+
   .logo {
-    img{
+    img {
       width: 10rem;
     }
   }
@@ -49,7 +53,7 @@ a {
     justify-content: space-between;
     .search-container {
       position: relative;
-      display: flex;#
+      display: flex;
       align-items: center;
       border: 0.7px solid $borderB;
       border-radius: 1rem;
@@ -91,7 +95,7 @@ a {
         font-size: 1.2rem;
         a {
           color: #999;
-         
+
           &::before {
             content: none;
           }
@@ -103,29 +107,26 @@ a {
     }
   }
 }
-.sidebar-wrapper {
-  padding-left: 0rem;
-  background-color: $app-back_3;
-  border-right: 1px solid $borderB;
-}
-
 .player-wrapper {
   border-top: 1px solid $borderB;
   position: fixed;
   bottom: 0;
   width: 100%;
 }
-
 //SIDEBAR
+.sidebar-wrapper {
+  padding-left: 0rem;
+  background-color: $app-back_3;
+  border-right: 1px solid $borderB;
+  height: 100vh;
+}
 .sidebar {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
-  width: 100%;
+  height: 100%;
   position: fixed;
-
   .text {
     color: $text-color;
   }

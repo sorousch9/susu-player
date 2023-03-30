@@ -10,7 +10,7 @@ const Header = () => {
   };
 
   return (
-    <Navbar className="header">
+    <Navbar className="header" fixed="top">
       <Container fluid>
         <Col md={3} xl={2} className="logo">
           <NavLink to="/">

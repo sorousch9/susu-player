@@ -10,7 +10,7 @@ interface Props {
 const Discover = ({ id, setId, musics, setMusics }: Props) => {
   return (
     <Container >
-      <Row>
+      <Row className="discover">
         {musics.map((music) => (
           <Col md={3} key={music.id} >
             <List

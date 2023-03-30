@@ -29,8 +29,8 @@ function App() {
         <Row>
           <Header />
         </Row>
-        <Row>
-          <Col md={3} xl={2} className="sidebar-wrapper">
+        <Row >
+          <Col md={3} xl={2} className="sidebar-wrapper" >
             <Sidebar />
           </Col>
           <Col md={9} xl={10}>
