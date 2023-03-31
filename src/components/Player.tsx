@@ -32,7 +32,7 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
 
   const skipForward = useCallback(() => {
     if (id === "") {
-      setId("1")
+      setId("1");
     } else if (isRandom) {
       skipRandom();
     } else if (id === "9") {
@@ -71,10 +71,9 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
     const newMinutes: string = minutes < 10 ? `0${minutes}` : `${minutes}`;
     const seconds: number = Math.floor(sec % 60);
     const newSeconds: string = seconds < 10 ? `0${seconds}` : `${seconds}`;
-  
+
     return `${newMinutes}:${newSeconds}`;
   };
-  
 
   const skipBack = () => {
     if (id === undefined) {
@@ -162,10 +161,10 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
           id === music.id ? (
             <Col key={music.id}>
               <div className="musicBanner">
-                <Image src={music.album_img} alt={music.name} />
+                <Image src={music.album_img} alt={music.title} />
                 <div className="musicBannerContent">
-                  <span>{music.name}</span>
-                  <p>{music.author}</p>
+                  <span>{music.title}</span>
+                  <p>{music.album}</p>
                 </div>
               </div>
               <audio src={music.audio} ref={audioTag} />

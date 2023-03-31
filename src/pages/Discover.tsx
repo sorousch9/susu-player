@@ -15,12 +15,10 @@ const Discover = ({ id, setId, musics, setMusics }: Props) => {
           <Col xs={6} md={2} key={music.id}>
             <List
               img={music.album_img}
-              name={music.name}
-              author={music.author}
+              title={music.title}
               audio={music.audio}
-              genre={music.genre}
+              album={music.album}
               setId={setId}
-              id={id}
               musicId={music.id}
             />
           </Col>

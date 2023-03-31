@@ -1,13 +1,10 @@
 export interface MusicType {
   id: string;
-  album_img: string;
-  name: string;
+  title: string;
+  artist: string;
+  album: string;
   author: string;
+  album_img: string;
   audio: string;
   genre: string;
-  isFull: boolean;
-  genres: string;
-  isSearch: boolean;
-  search: string;
-  windowWidth: number;
 }
