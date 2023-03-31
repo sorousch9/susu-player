@@ -66,7 +66,7 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
     skipForward,
   ]);
 
-  const calculateDuration = (sec: number): string => {
+  const formatDuration = (sec: number): string => {
     const minutes: number = Math.floor(sec / 60);
     const newMinutes: string = minutes < 10 ? `0${minutes}` : `${minutes}`;
     const seconds: number = Math.floor(sec % 60);
@@ -82,13 +82,6 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
       const idNum = parseInt(id);
       const newId = idNum - 1;
       setId(newId.toString());
-    }
-  };
-
-  const changeRange = () => {
-    if (progressBar.current && audioTag.current) {
-      audioTag.current.currentTime = parseFloat(progressBar.current.value);
-      setCurrentTime(parseFloat(progressBar.current.value));
     }
   };
   const skipForward10 = () => {
@@ -140,7 +133,6 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
       updateAudioProperties();
       return () => clearInterval(interval);
     }
-
     audioTag.current.pause();
     cancelAnimationFrame(animationRef.current);
     updateAudioProperties();
@@ -154,6 +146,14 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
     audioTag,
     progressBar,
   ]);
+
+  function handleRangeChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const value = parseFloat(event.target.value);
+    setCurrentTime(value);
+    if (audioTag.current) {
+      audioTag.current.currentTime = value;
+    }
+  }
   return (
     <Container fluid>
       <Row className="playerContainer">
@@ -167,7 +167,7 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
                   <p>{music.album}</p>
                 </div>
               </div>
-              <audio src={music.audio} ref={audioTag} />
+              <audio ref={audioTag} src={music.audio} />
             </Col>
           ) : null
         )}
@@ -178,7 +178,6 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
                 10sec
                 <i className="bi bi-arrow-counterclockwise" />
               </button>
-
               <button onClick={skipBack} style={{ rotate: "180deg" }}>
                 <i className="bi bi-fast-forward-fill" />
               </button>
@@ -202,18 +201,19 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
               </button>
             </div>
             <div className="progressBar">
-              <span className="PcurrentTime">
-                {calculateDuration(currentTime)}
-              </span>
+              <span className="currentTime">{formatDuration(currentTime)}</span>
               <input
                 type="range"
                 className="currentProgress"
                 defaultValue="0"
                 ref={progressBar}
-                onChange={changeRange}
+                onChange={handleRangeChange}
+                min="0"
+                max={duration}
+                step="0.01"
               />
-              <span className="Pduration">
-                {duration && !isNaN(duration) && calculateDuration(duration)}
+              <span className="duration">
+                {duration && !isNaN(duration) && formatDuration(duration)}
               </span>
             </div>
           </div>

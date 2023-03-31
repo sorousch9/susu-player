@@ -184,6 +184,7 @@ a {
       display: flex;
       flex-direction: column;
       align-items: center;
+
       .progressBar {
         display: flex;
         align-items: center;
@@ -192,19 +193,18 @@ a {
         bottom: 8px;
         right: 10px;
 
-        .PcurrentTime {
-          position: relative;
-          right: 10px;
+        .currentTime {
           color: #8b8b8b;
-          width: 35px;
-          font-size: 14px;
+          font-size: 0.9rem;
+          margin-right: 10px;
         }
+
         .currentProgress {
           --seek-before-width: 0px;
           appearance: none;
           border-radius: 10px;
           width: 380px;
-          margin: auto;
+          margin: 0 10px;
           background-color: $borderB;
           height: 5px;
           outline: none;
@@ -225,12 +225,21 @@ a {
           :active::-webkit-slider-thumb {
             transform: scale(1.2);
           }
+          /* style the progress */
+          &::-webkit-slider-thumb {
+            background-image: linear-gradient(
+              to right,
+              #c7c7c7 0%,
+              #a7a7a7 calc(var(--seek-before-width) / 100),
+              #ff0000 calc(var(--seek-before-width) / 100),
+              #ff0101 100%
+            );
+          }
         }
-        .Pduration {
-          position: relative;
-          left: 15px;
+
+        .duration {
           color: #8b8b8b;
-          font-size: 14px;
+          font-size: 0.9rem;
         }
       }
 
@@ -239,7 +248,7 @@ a {
         position: relative;
         bottom: 5;
         .clockwise {
-          font-size: .6rem;
+          font-size: 0.6rem;
           i {
             font-size: 1.4rem;
           }
