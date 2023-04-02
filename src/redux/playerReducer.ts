@@ -17,10 +17,21 @@ const playerSlice = createSlice({
     addMusic: (state, action: PayloadAction<MusicType>) => {
       state.currentMusic ||= action.payload;
     },
-   
+    setIsPlaying: (state, action: PayloadAction<boolean>) => {
+      state = { ...state, isPlaying: action.payload };
+    },
+    setVolume: (state, action: PayloadAction<number>) => {
+      state = { ...state, volume: action.payload ?? state.volume };
+    },
+    setIsRandom: (state, action: PayloadAction<boolean>) => {
+      state = { ...state, isRandom: action.payload };
+    },
+    setIsMuted: (state, action: PayloadAction<boolean>) => {
+      state = { ...state, isMuted: action.payload };
+    },
   },
 });
 
-export const { addMusic } =
+export const { addMusic, setIsPlaying, setVolume, setIsRandom, setIsMuted } =
   playerSlice.actions;
 export default playerSlice.reducer;
