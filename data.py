@@ -3,7 +3,7 @@ import random
 import requests
 
 API_URL = "https://api.deezer.com/search?q="
-QUERY_PARAMS = ["rock", "pop", "rap" , "jazz", "hippop"]
+QUERY_PARAMS = ["rock", "pop", "rap", "jazz", "hip hop"]
 NUM_MUSICS = 150
 
 musics = []
@@ -18,7 +18,6 @@ for i in range(NUM_MUSICS):
         "title": track.get("title", f"Title{i}"),
         "artist": track.get("artist", {}).get("name", f"Artist{i}"),
         "album": track.get("album", {}).get("title", f"Album{i}"),
-        "release_date": track.get("release_date", "Unknown"),
         "author": "Susu",
         "genre": query_param.capitalize(),
         "audio": track.get("preview", ""),
