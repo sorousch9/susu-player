@@ -1,67 +1,34 @@
-import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import playerReducer from "./playerReducer";
 
-interface PlayerState {
-  isPlaying: boolean;
-  volume: number;
-  duration: number;
-  isRandom: boolean;
-  currentTime: number;
-  isMuted: boolean;
-  currentMusic: string;
-}
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-const initialState: PlayerState = {
-  isPlaying: false,
-  volume: 1,
-  duration: 0,
-  isRandom: false,
-  currentTime: 0,
-  isMuted: false,
-  currentMusic: "",
+const persistConfig = {
+  key: "root",
+  storage,
 };
 
-const playerSlice = createSlice({
-  name: "player",
-  initialState,
-  reducers: {
-    setIsPlaying: (state, action: PayloadAction<boolean>) => {
-      state.isPlaying = action.payload;
-    },
-    setVolume: (state, action: PayloadAction<number>) => {
-      state.volume = action.payload;
-    },
-    setDuration: (state, action: PayloadAction<number>) => {
-      state.duration = action.payload;
-    },
-    setIsRandom: (state, action: PayloadAction<boolean>) => {
-      state.isRandom = action.payload;
-    },
-    setCurrentTime: (state, action: PayloadAction<number>) => {
-      state.currentTime = action.payload;
-    },
-    setIsMuted: (state, action: PayloadAction<boolean>) => {
-      state.isMuted = action.payload;
-    },
-    setCurrentMusic: (state, action: PayloadAction<string>) => {
-      state.currentMusic = action.payload;
-    },
-  },
+const rootReducer = combineReducers({ player: playerReducer });
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
-export const {
-  setIsPlaying,
-  setVolume,
-  setDuration,
-  setIsRandom,
-  setCurrentTime,
-  setIsMuted,
-  setCurrentMusic,
-} = playerSlice.actions;
-const playerReducer = playerSlice.reducer;
-const store = configureStore({
-  reducer: {
-    player: playerReducer,
-  },
-});
-
-export default store;
+export let persistor = persistStore(store);
