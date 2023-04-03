@@ -2,10 +2,13 @@ import { MusicType } from "../types/music";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 import { addMusic } from "../redux/playerReducer";
+
 const Discover = () => {
   const [musics, setMusics] = useState<MusicType[]>([]);
-
+  const dispatch = useDispatch();
+ 
   useEffect(() => {
     const fetchDataAsync = async () => {
       const response = await axios.get<MusicType[]>(
@@ -24,7 +27,7 @@ const Discover = () => {
           <Col xs={6} md={2} key={music.id}>
             <Card
               onClick={() => {
-                addMusic(music);
+                dispatch(addMusic(music))
               }}
               bg="transparent"
             >

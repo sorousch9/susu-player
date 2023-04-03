@@ -1,53 +1,63 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
-import { MusicType } from "../types/music";
+import { useDispatch, useSelector } from "react-redux";
+import { PlayerState } from "../types/playerState";
+import { setVolume, setIsRandom, setIsMuted } from "../redux/playerReducer";
 
-type Props = {
-  musics: MusicType[];
-  id: string;
-  setId: (e: string) => void;
-};
-
-export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
+export const Player: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [volume, setVolume] = useState<string>("1");
-  const [duration, setDuration] = useState<number>(0);
-  const [isRandom, setIsRandom] = useState<boolean>(false);
-  const [currentTime, setCurrentTime] = useState<number>(0);
-  const [isMuted, setIsMuted] = useState<boolean>(false);
-  const audioTag = useRef<HTMLAudioElement>(null);
-  const progressBar = useRef<HTMLInputElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const progressRef = useRef<HTMLInputElement>(null);
   const animationRef = useRef<number>(0);
+  const dispatch = useDispatch();
 
-  const skipRandom = useCallback(() => {
-    const idNum = parseInt(id);
-    const randomNum = Math.floor(Math.random() * 9);
-    if (randomNum === 0 || randomNum === idNum) {
-      const newNum = randomNum + 1;
-      setId(newNum.toString());
-    } else {
-      setId(randomNum.toString());
+  const { currentMusic, volume, isRandom, isMuted } = useSelector(
+    (state: { player: PlayerState }) => state.player
+  );
+  const [duration, setDuration] = useState<number>(0);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+
+  const skipBack = useCallback(() => {
+    if (audioRef.current) {
+      const newTime = audioRef.current.currentTime - 5;
+      if (newTime < 0) {
+        audioRef.current.currentTime = 0;
+        setCurrentTime(0);
+      } else {
+        audioRef.current.currentTime = newTime;
+        setCurrentTime(newTime);
+      }
     }
-  }, [id, setId]);
+  }, [audioRef]);
 
   const skipForward = useCallback(() => {
-    if (id === "") {
-      setId("1");
-    } else if (isRandom) {
-      skipRandom();
-    } else if (id === "9") {
-      setId("1");
-    } else {
-      const idNum = parseInt(id);
-      const newId = idNum + 1;
-      setId(newId.toString());
+    if (audioRef.current) {
+      const newTime = audioRef.current.currentTime + 5;
+      if (newTime > audioRef.current.duration) {
+        setIsPlaying(false);
+        audioRef.current.currentTime = 0;
+        setCurrentTime(0);
+      } else {
+        audioRef.current.currentTime = newTime;
+        setCurrentTime(newTime);
+      }
     }
-  }, [id, isRandom, skipRandom, setId]);
+  }, [audioRef]);
+
+  const skipRandom = useCallback(() => {
+    if (audioRef.current) {
+      const newTime = Math.floor(
+        Math.random() * Math.floor(audioRef.current.duration)
+      );
+      audioRef.current.currentTime = newTime;
+      setCurrentTime(newTime);
+    }
+  }, [audioRef]);
 
   const whilePlaying = useCallback(() => {
-    if (progressBar.current && audioTag.current) {
-      const { currentTime, duration } = audioTag.current;
-      progressBar.current.value = currentTime.toString();
+    if (progressRef.current && audioRef.current) {
+      const { currentTime, duration } = audioRef.current;
+      progressRef.current.value = currentTime.toString();
       setCurrentTime(currentTime);
 
       animationRef.current = requestAnimationFrame(whilePlaying);
@@ -57,8 +67,8 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
       }
     }
   }, [
-    progressBar,
-    audioTag,
+    progressRef,
+    audioRef,
     setCurrentTime,
     animationRef,
     isRandom,
@@ -74,36 +84,26 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
 
     return `${newMinutes}:${newSeconds}`;
   };
-
-  const skipBack = () => {
-    if (id === undefined) {
-      alert("Choose a song!");
-    } else {
-      const idNum = parseInt(id);
-      const newId = idNum - 1;
-      setId(newId.toString());
-    }
-  };
   const skipForward10 = () => {
-    if (audioTag.current && audioTag.current.currentTime) {
-      const newTime = audioTag.current.currentTime + 10;
-      if (newTime > audioTag.current.duration) {
+    if (audioRef.current && audioRef.current.currentTime) {
+      const newTime = audioRef.current.currentTime + 10;
+      if (newTime > audioRef.current.duration) {
         isRandom ? skipRandom() : skipForward();
       } else {
-        audioTag.current.currentTime = newTime;
+        audioRef.current.currentTime = newTime;
         setCurrentTime(newTime);
       }
     }
   };
 
   const skipBack10 = () => {
-    if (audioTag.current && audioTag.current.currentTime) {
-      const newTime = audioTag.current.currentTime - 10;
+    if (audioRef.current && audioRef.current.currentTime) {
+      const newTime = audioRef.current.currentTime - 10;
       if (newTime < 0) {
-        audioTag.current.currentTime = 0;
+        audioRef.current.currentTime = 0;
         setCurrentTime(0);
       } else {
-        audioTag.current.currentTime = newTime;
+        audioRef.current.currentTime = newTime;
         setCurrentTime(newTime);
       }
     }
@@ -111,66 +111,62 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
 
   useEffect(() => {
     const updateAudioProperties = () => {
-      if (audioTag.current) {
-        audioTag.current.volume = +volume;
-        audioTag.current.muted = isMuted;
+      if (audioRef.current) {
+        audioRef.current.volume = +volume;
+        audioRef.current.muted = isMuted;
       }
     };
 
-    if (id === "0" || !audioTag.current) {
+    if (currentMusic?.id === "0" || !audioRef.current) {
       return;
     }
 
     if (isPlaying) {
-      audioTag.current.play();
+      audioRef.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
       const interval = setInterval(() => {
-        if (audioTag.current && audioTag.current.duration) {
-          const seconds = Math.floor(audioTag.current.duration);
+        if (audioRef.current && audioRef.current.duration) {
+          const seconds = Math.floor(audioRef.current.duration);
           setDuration(seconds);
         }
       }, 1000);
       updateAudioProperties();
       return () => clearInterval(interval);
     }
-    audioTag.current.pause();
+    audioRef.current.pause();
     cancelAnimationFrame(animationRef.current);
     updateAudioProperties();
   }, [
-    id,
     whilePlaying,
     isPlaying,
     isMuted,
     volume,
-    musics,
-    audioTag,
-    progressBar,
+    currentMusic,
+    audioRef,
+    progressRef,
   ]);
 
   function handleRangeChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = parseFloat(event.target.value);
     setCurrentTime(value);
-    if (audioTag.current) {
-      audioTag.current.currentTime = value;
+    if (audioRef.current) {
+      audioRef.current.currentTime = value;
     }
   }
+  console.log(currentMusic?.audio);
   return (
     <Container fluid>
       <Row className="playerContainer">
-        {musics.map((music) =>
-          id === music.id ? (
-            <Col key={music.id}>
-              <div className="musicBanner">
-                <Image src={music.album_img} alt={music.title} />
-                <div className="musicBannerContent">
-                  <span>{music.title}</span>
-                  <p>{music.album}</p>
-                </div>
-              </div>
-              <audio ref={audioTag} src={music.audio} />
-            </Col>
-          ) : null
-        )}
+        <Col key={currentMusic?.id}>
+          <div className="musicBanner">
+            <Image src={currentMusic?.album_img} alt={currentMusic?.title} />
+            <div className="musicBannerContent">
+              <span>{currentMusic?.title}</span>
+              <p>{currentMusic?.album}</p>
+            </div>
+          </div>
+          <audio ref={audioRef} src={currentMusic?.audio} />
+        </Col>
         <Col className="player">
           <div className="inputButtons">
             <div className="buttons">
@@ -183,7 +179,7 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
               </button>
               <button
                 className="playPause"
-                style={{ fontSize: "2.5rem" }}
+                style={{ fontSize: "2.7rem" }}
                 onClick={() => setIsPlaying(!isPlaying)}
               >
                 {isPlaying ? (
@@ -206,7 +202,7 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
                 type="range"
                 className="currentProgress"
                 defaultValue="0"
-                ref={progressBar}
+                ref={progressRef}
                 onChange={handleRangeChange}
                 min="0"
                 max={duration}
@@ -220,7 +216,7 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
         </Col>
         <Col className="volumeC">
           <button
-            onClick={() => setIsRandom(!isRandom)}
+            onClick={() => dispatch(setIsRandom(!isRandom))}
             className="randomMusicsButton"
           >
             {isRandom ? (
@@ -231,7 +227,7 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
           </button>
           <button
             className="volumeButton buttons"
-            onClick={() => setIsMuted(!isMuted)}
+            onClick={() => dispatch(setIsMuted(!isMuted))}
           >
             {isMuted ? (
               <i className="bi bi-volume-mute" />
@@ -242,7 +238,7 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
           <input
             type="range"
             step="0.01"
-            onChange={(e) => setVolume(e.target.value)}
+            onChange={(e) => dispatch(setVolume(parseFloat(e.target.value)))}
             value={volume}
             max="1"
             min="0"
@@ -252,5 +248,4 @@ export const Player: React.FC<Props> = ({ musics, id, setId }: Props) => {
     </Container>
   );
 };
-
 export default Player;
