@@ -8,7 +8,7 @@ import { addMusic } from "../redux/playerReducer";
 const Discover = () => {
   const [musics, setMusics] = useState<MusicType[]>([]);
   const dispatch = useDispatch();
- 
+
   useEffect(() => {
     const fetchDataAsync = async () => {
       const response = await axios.get<MusicType[]>(
@@ -20,15 +20,14 @@ const Discover = () => {
     };
     fetchDataAsync();
   }, []);
+ 
   return (
     <Container>
       <Row className="discover">
         {musics.map((music) => (
           <Col xs={6} md={2} key={music.id}>
             <Card
-              onClick={() => {
-                dispatch(addMusic(music))
-              }}
+              onClick={() => dispatch(addMusic( {music} ))}
               bg="transparent"
             >
               <Card.Img src={music.album_img} alt={music.title} />

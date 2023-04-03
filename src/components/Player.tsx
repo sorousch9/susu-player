@@ -1,23 +1,24 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { PlayerState } from "../types/playerState";
-import { setVolume, setIsRandom, setIsMuted } from "../redux/playerReducer";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 export const Player: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLInputElement>(null);
   const animationRef = useRef<number>(0);
-  const dispatch = useDispatch();
-
-  const { currentMusic, volume, isRandom, isMuted } = useSelector(
-    (state: { player: PlayerState }) => state.player
-  );
+  const [isRandom, setIsRandom] = useState<boolean>(false);
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
+  const [volume, setVolume] = useState<string>("1");
+  const [isMuted, setIsMuted] = useState<boolean>(false);
 
-  const skipBack = useCallback(() => {
+  const currentMusic = useSelector(
+    (state: RootState) => state.player.currentMusic
+  );
+
+  const skipBack = () => {
     if (audioRef.current) {
       const newTime = audioRef.current.currentTime - 5;
       if (newTime < 0) {
@@ -28,9 +29,9 @@ export const Player: React.FC = () => {
         setCurrentTime(newTime);
       }
     }
-  }, [audioRef]);
+  };
 
-  const skipForward = useCallback(() => {
+  const skipForward = () => {
     if (audioRef.current) {
       const newTime = audioRef.current.currentTime + 5;
       if (newTime > audioRef.current.duration) {
@@ -42,9 +43,9 @@ export const Player: React.FC = () => {
         setCurrentTime(newTime);
       }
     }
-  }, [audioRef]);
+  };
 
-  const skipRandom = useCallback(() => {
+  const skipRandom = () => {
     if (audioRef.current) {
       const newTime = Math.floor(
         Math.random() * Math.floor(audioRef.current.duration)
@@ -52,29 +53,21 @@ export const Player: React.FC = () => {
       audioRef.current.currentTime = newTime;
       setCurrentTime(newTime);
     }
-  }, [audioRef]);
+  };
 
   const whilePlaying = useCallback(() => {
     if (progressRef.current && audioRef.current) {
-      const { currentTime, duration } = audioRef.current;
+      const { currentTime } = audioRef.current;
       progressRef.current.value = currentTime.toString();
-      setCurrentTime(currentTime);
+      if (progressRef.current && audioRef.current) {
+        const { currentTime } = audioRef.current;
+        progressRef.current.value = currentTime.toString();
+        setCurrentTime(currentTime);
 
-      animationRef.current = requestAnimationFrame(whilePlaying);
-
-      if (currentTime >= duration) {
-        isRandom ? skipRandom() : skipForward();
+        animationRef.current = requestAnimationFrame(whilePlaying);
       }
     }
-  }, [
-    progressRef,
-    audioRef,
-    setCurrentTime,
-    animationRef,
-    isRandom,
-    skipRandom,
-    skipForward,
-  ]);
+  }, [audioRef, setCurrentTime, animationRef]);
 
   const formatDuration = (sec: number): string => {
     const minutes: number = Math.floor(sec / 60);
@@ -137,10 +130,10 @@ export const Player: React.FC = () => {
     cancelAnimationFrame(animationRef.current);
     updateAudioProperties();
   }, [
+    volume,
     whilePlaying,
     isPlaying,
     isMuted,
-    volume,
     currentMusic,
     audioRef,
     progressRef,
@@ -153,18 +146,22 @@ export const Player: React.FC = () => {
       audioRef.current.currentTime = value;
     }
   }
-  console.log(currentMusic?.audio);
+
   return (
     <Container fluid>
       <Row className="playerContainer">
-        <Col key={currentMusic?.id}>
-          <div className="musicBanner">
-            <Image src={currentMusic?.album_img} alt={currentMusic?.title} />
-            <div className="musicBannerContent">
-              <span>{currentMusic?.title}</span>
-              <p>{currentMusic?.album}</p>
+        <Col>
+          {currentMusic !== null ? (
+            <div className="musicBanner">
+              <Image src={currentMusic.album_img} alt={currentMusic.title} />
+              <div className="musicBannerContent">
+                <span>{currentMusic.title}</span>
+                <p>{currentMusic.album}</p>
+              </div>
             </div>
-          </div>
+          ) : (
+            ""
+          )}
           <audio ref={audioRef} src={currentMusic?.audio} />
         </Col>
         <Col className="player">
@@ -216,7 +213,7 @@ export const Player: React.FC = () => {
         </Col>
         <Col className="volumeC">
           <button
-            onClick={() => dispatch(setIsRandom(!isRandom))}
+            onClick={() => setIsRandom(!isRandom)}
             className="randomMusicsButton"
           >
             {isRandom ? (
@@ -227,7 +224,7 @@ export const Player: React.FC = () => {
           </button>
           <button
             className="volumeButton buttons"
-            onClick={() => dispatch(setIsMuted(!isMuted))}
+            onClick={() => setIsMuted(!isMuted)}
           >
             {isMuted ? (
               <i className="bi bi-volume-mute" />
@@ -238,7 +235,7 @@ export const Player: React.FC = () => {
           <input
             type="range"
             step="0.01"
-            onChange={(e) => dispatch(setVolume(parseFloat(e.target.value)))}
+            onChange={(e) => setVolume(e.target.value)}
             value={volume}
             max="1"
             min="0"
