@@ -27,7 +27,7 @@ const Discover = () => {
         {musics.map((music) => (
           <Col xs={6} md={2} key={music.id}>
             <Card
-              onClick={() => dispatch(addMusic( {music} ))}
+              onClick={() => dispatch(addMusic({music}))}
               bg="transparent"
             >
               <Card.Img src={music.album_img} alt={music.title} />

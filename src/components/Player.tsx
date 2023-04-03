@@ -151,17 +151,13 @@ export const Player: React.FC = () => {
     <Container fluid>
       <Row className="playerContainer">
         <Col>
-          {currentMusic !== null ? (
-            <div className="musicBanner">
-              <Image src={currentMusic.album_img} alt={currentMusic.title} />
-              <div className="musicBannerContent">
-                <span>{currentMusic.title}</span>
-                <p>{currentMusic.album}</p>
-              </div>
+          <div className="musicBanner">
+            <Image src={currentMusic?.album_img} alt={currentMusic?.title} />
+            <div className="musicBannerContent">
+              <span>{currentMusic?.title}</span>
+              <p>{currentMusic?.album}</p>
             </div>
-          ) : (
-            ""
-          )}
+          </div>
           <audio ref={audioRef} src={currentMusic?.audio} />
         </Col>
         <Col className="player">

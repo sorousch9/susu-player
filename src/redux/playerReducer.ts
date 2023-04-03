@@ -7,7 +7,7 @@ interface AddMusicPayload {
 }
 
 const initialState: PlayerState = {
-  currentMusic: null
+  currentMusic: null,
 };
 
 const playerSlice = createSlice({
@@ -16,10 +16,8 @@ const playerSlice = createSlice({
   reducers: {
     addMusic: (state, action: PayloadAction<AddMusicPayload>) => {
       const { music } = action.payload;
-      if (!state.currentMusic) {
-        state.currentMusic = music;
-      }
-    }
+      state.currentMusic = music;
+    },
   },
 });
 
