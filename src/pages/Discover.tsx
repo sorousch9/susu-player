@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addMusic } from "../redux/playerReducer";
+import PlayList from "../components/Playlist";
 
 const Discover = () => {
   const [musics, setMusics] = useState<MusicType[]>([]);
@@ -20,14 +21,15 @@ const Discover = () => {
     };
     fetchDataAsync();
   }, []);
- 
+
   return (
     <Container>
       <Row className="discover">
+        <PlayList />
         {musics.map((music) => (
           <Col xs={6} md={2} key={music.id}>
             <Card
-              onClick={() => dispatch(addMusic({music}))}
+              onClick={() => dispatch(addMusic({ music }))}
               bg="transparent"
             >
               <Card.Img src={music.album_img} alt={music.title} />
