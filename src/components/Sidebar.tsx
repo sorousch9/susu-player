@@ -11,11 +11,9 @@ const Sidebar = () => {
 
   return (
     <Navbar className="sidebar" expand="md" variant="dark">
-      <div className="logo">
-          <NavLink to="/">
-            <img src={logo} alt="logo" />
-          </NavLink>
-        </div>
+      <NavLink to="/" className="logo">
+        <img src={logo} alt="logo" />
+      </NavLink>
       <Navbar.Toggle onClick={handleToggle} />
       <Navbar.Collapse className={expanded ? "show" : ""}>
         <Nav className="flex-column">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Navbar, Nav, NavDropdown, Col } from "react-bootstrap";
+import {  Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");

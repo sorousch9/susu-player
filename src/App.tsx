@@ -7,7 +7,7 @@ import Header from "./components/Header";
 function App() {
   return (
     <BrowserRouter>
-      <Container fluid>
+      <Container fluid >
         <Row>
           <Col md={3} xl={2} className="sidebar-wrapper">
             <Sidebar />

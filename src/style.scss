@@ -39,16 +39,20 @@ a {
 }
 
 .discover {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  margin-top: 70px;
+  margin-bottom: 120px;
 }
 .body-wrapper {
   padding: 0rem 0rem;
-  position: relative;
+  margin-left: 240px;
+  @media (max-width: 768px) {
+    margin-left: 0px;
+  }
 }
 .header {
   background-color: $app-back_3;
   border-bottom: 1px solid $borderB;
+  height: 60px;
   width: 100%;
   position: fixed;
   z-index: 1;
@@ -115,6 +119,7 @@ a {
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 4;
 }
 //SIDEBAR
 .sidebar-wrapper {
@@ -122,25 +127,50 @@ a {
   background-color: $app-back_3;
   border-right: 1px solid $borderB;
   height: 100vh;
+  width: 240px;
   display: flex;
-  align-items: center;
-  z-index: 99;
+  align-items: flex-start;
+  z-index: 3;
+  position: fixed;
   @media (max-width: 768px) {
     height: auto;
+    width: 100%;
   }
+
   .sidebar {
     width: 100%;
     margin-left: 0.6rem;
-    .navbar-toggler {
-      margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
     }
+    .navbar-toggler {
+      right: 1rem;
+    }
+    .logo {
+      height: 3.3rem;
+      border-bottom: 1px solid $borderB;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @media (max-width: 768px) {
+        border-bottom: none;
+      }
+      img {
+        width: 13rem;
+        height: 2rem;
+      }
+    }
+
     .listSideBar {
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: center;
-      width: 100%;
       padding: 0.5rem;
       font-size: 1.1rem;
+      min-width: 13rem;
       i {
         margin-right: 1rem;
         font-size: 1.5rem;
