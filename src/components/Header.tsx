@@ -1,6 +1,5 @@
 import { useState } from "react";
-import {  Navbar, Nav, NavDropdown } from "react-bootstrap";
-
+import { Nav, NavDropdown, Navbar } from "react-bootstrap";
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
 
@@ -22,14 +21,12 @@ const Header = () => {
             onChange={handleSearch}
           />
         </div>
-
-        <Nav>
+        <Nav className="nav-drop">
           <NavDropdown
             title={<i className="bi bi-person-fill" />}
             id="nav-dropdown"
             menuVariant="dark"
             drop="start"
-            className="nav-dropD"
           >
             <NavDropdown.Item href="#">Profile</NavDropdown.Item>
             <NavDropdown.Item href="#">Preferences</NavDropdown.Item>
