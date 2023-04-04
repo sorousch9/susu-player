@@ -4,6 +4,7 @@ $font-family_1: monospace;
 $app-back_1: #1c1c1c;
 $app-back_2: #222222;
 $app-back_3: #252525;
+$app-back_Hover: #343434;
 $background-color_1: #8d8d8d;
 $background-color_2: #abd485;
 $text-color: #ededed;
@@ -36,20 +37,14 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
 .discover {
   margin-top: 5rem;
   margin-bottom: 5rem;
-  
 }
 .header {
   background-color: $app-back_3;
   border-bottom: 1px solid $borderB;
-
-  .logo {
-    img {
-      width: 10rem;
-    }
-  }
   .header-nav {
     display: flex;
     justify-content: space-between;
@@ -67,10 +62,9 @@ a {
         color: $text-color;
         min-width: 22rem;
         outline: none;
-        @media (max-width: 768px) {
-          min-width: 10rem;
+        @media (max-width: 460px) {
+          min-width: 17rem;
         }
-
         &::placeholder {
           color: #999;
         }
@@ -121,21 +115,40 @@ a {
   background-color: $app-back_3;
   border-right: 1px solid $borderB;
   height: 100vh;
+  display: flex;
+  align-items: center;
+  z-index: 99;
   @media (max-width: 768px) {
     height: auto;
   }
-}
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100%;
-  position: fixed;
-  .text {
-    color: $text-color;
+  .sidebar {
+    width: 100%;
+    margin-left: 0.6rem;
+    .navbar-toggler {
+      margin-top:4rem;
+ 
+    }
+    .listSideBar {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1.1rem;
+      i {
+        margin-right: 1rem;
+        font-size: 1.5rem;
+      }
+      &:hover {
+        border-radius: 2px;
+        min-width: 13rem;
+        color: $text-color;
+        background-color: $app-back_Hover;
+      }
+    }
   }
 }
+
 //player
 
 .playerContainer {
