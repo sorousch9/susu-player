@@ -9,7 +9,7 @@ const Header = () => {
   };
 
   return (
-    <Navbar className="header" fixed="top">
+    <Navbar className="header">
       <div className="header-nav">
         <div className="search-container">
           <div className="search-icon">

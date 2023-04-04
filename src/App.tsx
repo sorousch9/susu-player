@@ -12,7 +12,7 @@ function App() {
           <Col md={3} xl={2} className="sidebar-wrapper">
             <Sidebar />
           </Col>
-          <Col md={9} xl={10}>
+          <Col md={9} xl={10} className="body-wrapper">
             <Header />
             <Routes>
               <Route path="/" element={<Discover />} />
