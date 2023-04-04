@@ -182,6 +182,13 @@ a {
         background-color: $app-back_Hover;
       }
     }
+    .dropdown {
+      button {
+        border: none;
+        background-color: transparent;
+        color: $text-color;
+      }
+    }
   }
 }
 
