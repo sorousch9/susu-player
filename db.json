@@ -27,6 +27,7 @@
       "album": "Running Miles",
       "author": "Susu",
       "genre": "Hippop",
+      "topMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/775741873582899230/Julius_Dreisig___Zeus_X_Crona_-_Invisible_NCS_RelMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/18e94f0aa9338089912d263d12c308ac/250x250-000000-80-0-0.jpg"
     },
@@ -37,7 +38,6 @@
       "album": "Rock n Roll Jesus",
       "author": "Susu",
       "genre": "Rock",
-      "topMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/775741894939901992/K-391_-_Earth_NCS_ReleaseMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/b0ce5aa10cc52b8dc6661c7ce9b6c876/250x250-000000-80-0-0.jpg"
     },
@@ -48,6 +48,7 @@
       "album": "Bawskee 2",
       "author": "Susu",
       "genre": "Hippop",
+      "topMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/775741906344869928/Kadenza_-_Harpuia_NCS_ReleaseMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/5659f30f9708b9e9f86b91b68f8033ce/250x250-000000-80-0-0.jpg"
     },
@@ -58,6 +59,7 @@
       "album": "Infinity",
       "author": "Susu",
       "genre": "Pop",
+      "topMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/775741919178653716/Lost_Sky_-_Dreams_NCS_ReleaseMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/8c8cdfd1195c76f0c853e50cc4f67e7f/250x250-000000-80-0-0.jpg"
     },
@@ -68,6 +70,7 @@
       "album": "Live At Wembley",
       "author": "Susu",
       "genre": "Rock",
+      "topMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/775741949998399572/Lost_Sky_-_Fearless_pt.II_feat._Chris_Linton_NCMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/34f56d7c5af8ac50ce6a3be042051158/250x250-000000-80-0-0.jpg"
     },
@@ -78,6 +81,7 @@
       "album": "Reloaded",
       "author": "Susu",
       "genre": "Hippop",
+      "topMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/775741989177524264/Lost_Sky_-_Where_We_Started_feat._Jex_NCS_ReleaMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/f44499e59f803d07bff46fd3d019e498/250x250-000000-80-0-0.jpg"
     },
@@ -168,6 +172,7 @@
       "album": "Rap God",
       "author": "Susu",
       "genre": "Rap",
+      "topMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/782129660301279252/Luis_Fonsi__Demi_Lovato_-_Echame_La_Culpa_Video_OMP3_128K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/7f9164c941673e63d4b65c6b27b90b18/250x250-000000-80-0-0.jpg"
     },
@@ -198,6 +203,7 @@
       "album": "Honky Chateau",
       "author": "Susu",
       "genre": "Rock",
+      "exclusive": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/782129781373272084/Justin_Bieber_-_Baby_ft._Ludacris_Official_MusicMP3_128K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/56121010d25e75058e2cc817037ad19b/250x250-000000-80-0-0.jpg"
     },
@@ -208,6 +214,7 @@
       "album": "The Marshall Mathers LP2 (Deluxe)",
       "author": "Susu",
       "genre": "Rap",
+      "exclusive": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/782129797403770900/Charlie_Puth_-_We_Don_t_Talk_Anymore_feat._SelenaMP3_128K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/7c71224818ac99b16570357b2f98e041/250x250-000000-80-0-0.jpg"
     },
@@ -228,6 +235,7 @@
       "album": "Aaliyah",
       "author": "Susu",
       "genre": "Rock",
+      "exclusive": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/782129915348385822/Alan_Walker___Ava_Max_-_Alone__Pt._IIMP3_128K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/807027e9b1cf180d78b96c5b7969172f/250x250-000000-80-0-0.jpg"
     },
@@ -248,6 +256,7 @@
       "album": "Raw Footage",
       "author": "Susu",
       "genre": "Rap",
+      "hitsMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/782129959174012928/PRETTYMUCH__CNCO_-_Me_Necesita_Official_VideoMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/d328eb0b0bb1f6ad85d7820db55bf357/250x250-000000-80-0-0.jpg"
     },
@@ -258,6 +267,7 @@
       "album": "MM..FOOD",
       "author": "Susu",
       "genre": "Rap",
+      "hitsMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/782129973439102986/Shawn_Mendes__Camila_Cabello_-_Senorita_LyricsMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/eb41db75ea6b22ad495876e7fa944bb4/250x250-000000-80-0-0.jpg"
     },
@@ -268,6 +278,7 @@
       "album": "Smooth Jazz Piano",
       "author": "Susu",
       "genre": "Jazz",
+      "hitsMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/782130010088669204/Au_Ra__Alan_Walker_-_Ghost_Official_VideoMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/389670774c1c046b70e22d072dde5282/250x250-000000-80-0-0.jpg"
     },
@@ -278,6 +289,7 @@
       "album": "The Low End Theory",
       "author": "Susu",
       "genre": "Jazz",
+      "hitsMusics": true,
       "audio": "https://cdns-preview-c.dzcdn.net/stream/c-c2c8a02ee993437e6829bb7047a84df4-10.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/08793909075a6d5f812fdfab902f03b0/250x250-000000-80-0-0.jpg"
     },
@@ -298,6 +310,7 @@
       "album": "Cuphead Rap",
       "author": "Susu",
       "genre": "Rap",
+      "hitsMusics": true,
       "audio": "https://cdns-preview-b.dzcdn.net/stream/c-bbef454d7e12a31af2714ffac9f183b0-4.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/c2cabf2e96e05058eca678de3cd61de8/250x250-000000-80-0-0.jpg"
     },
@@ -308,6 +321,7 @@
       "album": "Run It!",
       "author": "Susu",
       "genre": "Rap",
+      "hitsMusics": true,
       "audio": "https://cdns-preview-2.dzcdn.net/stream/c-2f3eafbaa025f72ad6afae15b8737d11-3.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/63b5c97788924c65ab8bbfc95467cc68/250x250-000000-80-0-0.jpg"
     },
@@ -318,6 +332,7 @@
       "album": "Smooth Jazz Piano",
       "author": "Susu",
       "genre": "Jazz",
+      "hitsMusics": true,
       "audio": "https://cdns-preview-7.dzcdn.net/stream/c-7eadb3f8c3801e3a24e6880412cfbec9-4.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/389670774c1c046b70e22d072dde5282/250x250-000000-80-0-0.jpg"
     },
@@ -328,6 +343,7 @@
       "album": "Rap \u00c9 Compromisso",
       "author": "Susu",
       "genre": "Rap",
+      "hitsMusics": true,
       "audio": "https://cdns-preview-7.dzcdn.net/stream/c-7eec81932b72b4b8601d62c5342e9a17-5.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/8134415554feb24527f12cd3ff01c976/250x250-000000-80-0-0.jpg"
     },
@@ -358,6 +374,7 @@
       "album": "Rock n Roll Jesus",
       "author": "Susu",
       "genre": "Rock",
+      "exclusive": true,
       "audio": "https://cdns-preview-4.dzcdn.net/stream/c-4cfc4b781a41bbd627ee8b7c26d4f6d6-11.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/b0ce5aa10cc52b8dc6661c7ce9b6c876/250x250-000000-80-0-0.jpg"
     },

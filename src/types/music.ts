@@ -7,4 +7,7 @@ export interface MusicType {
   album_img: string;
   audio: string;
   genre: string;
+  topMusics: string;
+  hitsMusics: string;
+  exclusive: string;
 }
