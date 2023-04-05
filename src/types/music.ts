@@ -8,6 +8,6 @@ export interface MusicType {
   audio: string;
   genre: string;
   topMusics: string;
-  hitsMusics: string;
+  remix: string;
   exclusive: string;
 }
