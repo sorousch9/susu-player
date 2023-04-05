@@ -13,13 +13,12 @@ const Discover = () => {
   useEffect(() => {
     const fetchDataAsync = async () => {
       const url = "http://localhost:3009/musics";
-      const params = {
-        topMusics: true,
-        HitsMusics: true,
-      };
-      const response = await axios.get<MusicType[]>(url, { params });
+      const response = await axios.get<MusicType[]>(url);
       if (response.data) {
-        setMusics(response.data);
+        const filteredMusics = response.data.filter(
+          (music) => music.topMusics || music.hitsMusics || music.exclusive
+        );
+        setMusics(filteredMusics);
       }
     };
     fetchDataAsync();
