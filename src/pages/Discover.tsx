@@ -5,17 +5,20 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addMusic } from "../redux/playerReducer";
 import PlayList from "../components/Playlist";
+import { SusuExclusive } from "../components/SusuExclusive";
 
 const Discover = () => {
   const [musics, setMusics] = useState<MusicType[]>([]);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const fetchDataAsync = async () => {
-      const response = await axios.get<MusicType[]>(
-        "http://localhost:3009/musics"
-      );
-      if (response !== undefined) {
+      const url = "http://localhost:3009/musics";
+      const params = {
+        topMusics: true,
+        HitsMusics: true,
+      };
+      const response = await axios.get<MusicType[]>(url, { params });
+      if (response.data) {
         setMusics(response.data);
       }
     };
@@ -26,6 +29,7 @@ const Discover = () => {
     <Container>
       <Row className="discover">
         <PlayList />
+        <SusuExclusive />
         {musics.map((music) => (
           <Col xs={6} md={2} key={music.id}>
             <Card

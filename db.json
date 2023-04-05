@@ -37,6 +37,7 @@
       "album": "Rock n Roll Jesus",
       "author": "Susu",
       "genre": "Rock",
+      "topMusics": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/775741894939901992/K-391_-_Earth_NCS_ReleaseMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/b0ce5aa10cc52b8dc6661c7ce9b6c876/250x250-000000-80-0-0.jpg"
     },

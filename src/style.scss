@@ -96,6 +96,10 @@ a {
     }
   }
 }
+//items start from left
+.slick-track {
+  margin-left: 0rem !important;
+}
 .cart-wrapper {
   padding: 1.5rem 1rem;
   .card {
@@ -150,9 +154,24 @@ a {
       }
     }
   }
-  .content-banner {
-    display: flex;
-    justify-content: space-between;
+  .banner {
+    .content-banner {
+      display: flex;
+      justify-content: space-between;
+      a {
+        &:hover {
+          text-decoration: underline;
+          color: inherit;
+        }
+      }
+    }
+    .sub-title {
+      font-size: 0.8rem;
+      &:hover {
+        color: #ededed;
+        font-size: 1rem;
+      }
+    }
   }
 }
 
