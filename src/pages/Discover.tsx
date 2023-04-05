@@ -2,23 +2,44 @@ import { MusicType } from "../types/music";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { addMusic } from "../redux/playerReducer";
 import PlayList from "../components/Playlist";
 import { SusuExclusive } from "../components/SusuExclusive";
-
+import { HotTracks } from "../components/HotTracks";
+import { Featured } from "../components/Featured";
+import { DjMixed } from "../components/DjMixed";
+import { Footer } from "../components/Footer";
+import { TrendingArtits } from "../components/TrendingArtits";
+import { useDispatch } from "react-redux";
+import { addMusic } from "../redux/playerReducer";
+type FilteredMusicsType = {
+  topMusics: MusicType[];
+  exclusive: MusicType[];
+  remix: MusicType[];
+};
 const Discover = () => {
   const [musics, setMusics] = useState<MusicType[]>([]);
+  const [filteredMusics, setFilteredMusics] = useState<FilteredMusicsType>({
+    topMusics: [],
+    remix: [],
+    exclusive: [],
+  });
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchDataAsync = async () => {
       const url = "http://localhost:3009/musics";
       const response = await axios.get<MusicType[]>(url);
       if (response.data) {
-        const filteredMusics = response.data.filter(
-          (music) => music.topMusics || music.hitsMusics || music.exclusive
+        const filteredMusicsObject = response.data.reduce(
+          (acc: FilteredMusicsType, music: MusicType) => {
+            if (music.topMusics) acc.topMusics.push(music);
+            if (music.exclusive) acc.exclusive.push(music);
+            if (music.remix) acc.remix.push(music);
+            return acc;
+          },
+          { topMusics: [], remix: [], exclusive: [] }
         );
-        setMusics(filteredMusics);
+        setMusics(response.data);
+        setFilteredMusics(filteredMusicsObject);
       }
     };
     fetchDataAsync();
@@ -28,8 +49,13 @@ const Discover = () => {
     <Container>
       <Row className="discover">
         <PlayList />
-        <SusuExclusive />
-        {musics.map((music) => (
+        <SusuExclusive exclusiveMusic={filteredMusics.exclusive} />
+        <HotTracks topMusics={filteredMusics.topMusics} />
+        <Featured />
+        <DjMixed remixMusic={filteredMusics.remix} />
+        <TrendingArtits />
+        <Footer />
+        {/* {musics.map((music) => (
           <Col xs={6} md={2} key={music.id}>
             <Card
               onClick={() => dispatch(addMusic({ music }))}
@@ -43,7 +69,7 @@ const Discover = () => {
               <audio src={music.audio} />
             </Card>
           </Col>
-        ))}
+        ))} */}
       </Row>
     </Container>
   );
