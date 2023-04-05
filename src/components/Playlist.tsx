@@ -1,7 +1,13 @@
 import Slider from "react-slick";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import todayHits from "../assets/todayHits.webp";
+import crush from "../assets/crush.webp";
+import dance from "../assets/dance.webp";
+import feelGood from "../assets/feelGood.webp";
+import relaxing from "../assets/relaxing.webp";
+import traffic from "../assets/traffic.webp";
 import { Link } from "react-router-dom";
+import { Fragment } from "react";
 const PlayList = () => {
   const settings = {
     dots: true,
@@ -36,25 +42,40 @@ const PlayList = () => {
       },
     ],
   };
-
+  const playlist = [
+    { id: 1, img: todayHits, title: "Today Top Hits" },
+    { id: 2, img: crush, title: "Crush" },
+    { id: 3, img: dance, title: "Dance" },
+    { id: 4, img: feelGood, title: "Feel Good" },
+    { id: 5, img: relaxing, title: "Relaxing" },
+    { id: 6, img: traffic, title: "Traffic" },
+  ];
   return (
     <Container>
       <Row>
         <Col>
           <Slider {...settings}>
-            <Card className="card">
-              <Card.Img variant="top" src={todayHits} />
-              <Card.ImgOverlay className="card-img-overlay">
-                <div className="overlay-icon">
-                  <Link to="/">
-                    <i className="bi bi-play-fill"></i>
-                  </Link>
-                  <Link to="/">
-                    <i className="bi bi-star"></i>
-                  </Link>
+            {playlist.map((item) => (
+              <div key={item.id} className="cart-wrapper">
+                <Card className="card">
+                  <Card.Img variant="top" src={item.img} />
+                  <Card.ImgOverlay className="card-img-overlay">
+                    <div className="overlay-icon">
+                      <Link to="/">
+                        <i className="bi bi-play-fill" />
+                      </Link>
+                      <Link to="/">
+                        <i className="bi bi-star" />
+                      </Link>
+                    </div>
+                  </Card.ImgOverlay>
+                </Card>
+                <div className="content-banner">
+                  <span>{item.title}</span>
+                  <i className="bi bi-music-note-list" />
                 </div>
-              </Card.ImgOverlay>
-            </Card>
+              </div>
+            ))}
             <div>
               <h3>Slide 2</h3>
             </div>
