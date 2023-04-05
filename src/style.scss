@@ -100,8 +100,16 @@ a {
 .slick-track {
   margin-left: 0rem !important;
 }
+.component-title{
+  margin-left: 1rem;
+}
 .cart-wrapper {
-  padding: 1.5rem 1rem;
+  padding: 0rem 1rem;
+  padding-bottom: 1.5rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: $text-color;
   .card {
     position: relative;
     border: none;
@@ -159,6 +167,10 @@ a {
       display: flex;
       justify-content: space-between;
       a {
+        width: 100%;
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        white-space: nowrap;
         &:hover {
           text-decoration: underline;
           color: inherit;
