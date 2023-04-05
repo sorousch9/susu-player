@@ -7,10 +7,8 @@ import feelGood from "../assets/feelGood.webp";
 import relaxing from "../assets/relaxing.webp";
 import traffic from "../assets/traffic.webp";
 import { Link } from "react-router-dom";
-import { Fragment } from "react";
 const PlayList = () => {
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 5,
@@ -22,7 +20,6 @@ const PlayList = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          dots: true,
         },
       },
       {
@@ -54,6 +51,7 @@ const PlayList = () => {
     <Container>
       <Row>
         <Col>
+          <h4 className="component-title">Playlist</h4>
           <Slider {...settings}>
             {playlist.map((item) => (
               <div key={item.id} className="cart-wrapper">
@@ -70,36 +68,14 @@ const PlayList = () => {
                     </div>
                   </Card.ImgOverlay>
                 </Card>
-                <div className="content-banner">
-                  <span>{item.title}</span>
-                  <i className="bi bi-music-note-list" />
+                <div className="banner">
+                  <div className="content-banner">
+                    <Link to="/">{item.title}</Link>
+                    <i className="bi bi-music-note-list" />
+                  </div>
                 </div>
               </div>
             ))}
-            <div>
-              <h3>Slide 2</h3>
-            </div>
-            <div>
-              <h3>Slide 3</h3>
-            </div>
-            <div>
-              <h3>Slide 4</h3>
-            </div>
-            <div>
-              <h3>Slide 5</h3>
-            </div>
-            <div>
-              <h3>Slide 6</h3>
-            </div>
-            <div>
-              <h3>Slide 7</h3>
-            </div>
-            <div>
-              <h3>Slide 8</h3>
-            </div>
-            <div>
-              <h3>Slide 9</h3>
-            </div>
           </Slider>
         </Col>
       </Row>
