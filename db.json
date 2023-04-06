@@ -256,7 +256,7 @@
       "album": "Raw Footage",
       "author": "Susu",
       "genre": "Rap",
-      "remix":true,
+      "remix": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/782129959174012928/PRETTYMUCH__CNCO_-_Me_Necesita_Official_VideoMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/d328eb0b0bb1f6ad85d7820db55bf357/250x250-000000-80-0-0.jpg"
     },
@@ -277,7 +277,7 @@
       "album": "Smooth Jazz Piano",
       "author": "Susu",
       "genre": "Jazz",
-      "remix":true,
+      "remix": true,
       "audio": "https://cdn.discordapp.com/attachments/775740994595323954/782130010088669204/Au_Ra__Alan_Walker_-_Ghost_Official_VideoMP3_160K.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/389670774c1c046b70e22d072dde5282/250x250-000000-80-0-0.jpg"
     },
@@ -288,7 +288,7 @@
       "album": "The Low End Theory",
       "author": "Susu",
       "genre": "Jazz",
-      "remix":true,
+      "remix": true,
       "audio": "https://cdns-preview-c.dzcdn.net/stream/c-c2c8a02ee993437e6829bb7047a84df4-10.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/08793909075a6d5f812fdfab902f03b0/250x250-000000-80-0-0.jpg"
     },
@@ -299,7 +299,7 @@
       "album": "SALES LP",
       "author": "Susu",
       "genre": "Jazz",
-      "remix":true,
+      "remix": true,
       "audio": "https://cdns-preview-b.dzcdn.net/stream/c-b230c530d6d3280934ed35de6e127a8a-6.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/5dff87f0de2676984f8208c514a9d9d7/250x250-000000-80-0-0.jpg"
     },
@@ -310,7 +310,7 @@
       "album": "Cuphead Rap",
       "author": "Susu",
       "genre": "Rap",
-      "remix":true,
+      "remix": true,
       "audio": "https://cdns-preview-b.dzcdn.net/stream/c-bbef454d7e12a31af2714ffac9f183b0-4.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/c2cabf2e96e05058eca678de3cd61de8/250x250-000000-80-0-0.jpg"
     },
@@ -321,7 +321,7 @@
       "album": "Run It!",
       "author": "Susu",
       "genre": "Rap",
-      "remix":true,
+      "remix": true,
       "audio": "https://cdns-preview-2.dzcdn.net/stream/c-2f3eafbaa025f72ad6afae15b8737d11-3.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/63b5c97788924c65ab8bbfc95467cc68/250x250-000000-80-0-0.jpg"
     },
@@ -332,8 +332,8 @@
       "album": "Smooth Jazz Piano",
       "author": "Susu",
       "genre": "Jazz",
-      "remix":true,
-      "audio": "https://cdns-preview-7.dzcdn.net/stream/c-7eadb3f8c3801e3a24e6880412cfbec9-4.mp3",
+      "remix": true,
+      "audio": "https://cdn.pixabay.com/audio/2022/11/11/audio_684ca37dc0.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/389670774c1c046b70e22d072dde5282/250x250-000000-80-0-0.jpg"
     },
     {
@@ -343,7 +343,7 @@
       "album": "Rap \u00c9 Compromisso",
       "author": "Susu",
       "genre": "Rap",
-      "remix":true,
+      "remix": true,
       "audio": "https://cdns-preview-7.dzcdn.net/stream/c-7eec81932b72b4b8601d62c5342e9a17-5.mp3",
       "album_img": "https://e-cdns-images.dzcdn.net/images/cover/8134415554feb24527f12cd3ff01c976/250x250-000000-80-0-0.jpg"
     },

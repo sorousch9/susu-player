@@ -51,7 +51,7 @@ const Discover = () => {
         <PlayList />
         <SusuExclusive exclusiveMusic={filteredMusics.exclusive} />
         <HotTracks topMusics={filteredMusics.topMusics} />
-        <Featured />
+        <Featured remixMusic={filteredMusics.remix}/>
         <DjMixed remixMusic={filteredMusics.remix} />
         <TrendingArtits />
         <Footer />
