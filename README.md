@@ -95,3 +95,10 @@
         Thank you for checking out this project. If you have any questions or
         feedback, feel free to contact me at.
       </p>
+![full Home Page](/public/screen1.webp?raw=true "full Home Page")
+<br />
+![...](/public/screen2.webp?raw=true "...")
+<br/>
+![...](/public/screen3.webp?raw=true "...")
+<br/>
+![...](/public/screen4.webp?raw=true "...")
