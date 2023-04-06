@@ -8,6 +8,7 @@ $app-back_Hover: #343434;
 $background-color_1: #8d8d8d;
 $background-color_2: #abd485;
 $text-color: #ededed;
+$text-muted:#9f9f9f;
 $selected: #5f9a27;
 $seek-before-width: 20;
 $bar-bg: #d8d8d8;
@@ -100,9 +101,10 @@ a {
 .slick-track {
   margin-left: 0rem !important;
 }
-.component-title{
+.component-title {
   margin-left: 1rem;
 }
+
 .cart-wrapper {
   padding: 0rem 1rem;
   padding-bottom: 1.5rem;
@@ -110,6 +112,12 @@ a {
   border: none;
   outline: none;
   color: $text-color;
+  text-align: start;
+  .aa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .card {
     position: relative;
     border: none;
@@ -168,8 +176,8 @@ a {
       justify-content: space-between;
       a {
         width: 100%;
-        overflow: hidden; 
-        text-overflow: ellipsis; 
+        overflow: hidden;
+        text-overflow: ellipsis;
         white-space: nowrap;
         &:hover {
           text-decoration: underline;
@@ -474,6 +482,31 @@ a {
         color: $text-color;
         font-size: 1.4rem;
       }
+    }
+  }
+}
+.footer {
+  p{
+    margin-bottom: .3rem;
+    font-size: .9rem;
+    color: $text-muted;
+    cursor: pointer;
+
+  }
+  .tab1 {
+    display: flex;
+    flex-direction: row;
+    .footer-more {
+      margin-left: 1rem;
+      margin-right: 4rem;
+    }
+  }
+  .tab2 {
+    span{
+      color: $text-muted;
+      margin-right: 1rem;
+      font-size: .9rem;
+      cursor: pointer;
     }
   }
 }
