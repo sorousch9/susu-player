@@ -8,7 +8,7 @@ $app-back_Hover: #343434;
 $background-color_1: #8d8d8d;
 $background-color_2: #abd485;
 $text-color: #ededed;
-$text-muted:#9f9f9f;
+$text-muted: #9f9f9f;
 $selected: #5f9a27;
 $seek-before-width: 20;
 $bar-bg: #d8d8d8;
@@ -122,6 +122,7 @@ a {
     position: relative;
     border: none;
     box-shadow: none;
+
     .card-img-overlay {
       position: absolute;
       top: 0;
@@ -139,7 +140,13 @@ a {
       &:hover {
         opacity: 1;
       }
+      .artist {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
     }
+
     .overlay-icon {
       display: flex;
       justify-content: flex-start;
@@ -147,6 +154,7 @@ a {
       height: 100%;
       opacity: 0;
       transition: opacity 0.3s ease-in-out;
+
       a {
         color: #ffffff;
         background-color: #c60000;
@@ -169,6 +177,12 @@ a {
         opacity: 1;
       }
     }
+  }
+  .artist-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.5rem;
   }
   .banner {
     .content-banner {
@@ -280,6 +294,7 @@ a {
         height: 60px;
         width: 220px;
         object-fit: contain;
+        padding: 1rem;
       }
     }
 
@@ -486,12 +501,12 @@ a {
   }
 }
 .footer {
-  p{
-    margin-bottom: .3rem;
-    font-size: .9rem;
+  margin-top: 2rem;
+  p {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
     color: $text-muted;
     cursor: pointer;
-
   }
   .tab1 {
     display: flex;
@@ -502,10 +517,10 @@ a {
     }
   }
   .tab2 {
-    span{
+    span {
       color: $text-muted;
       margin-right: 1rem;
-      font-size: .9rem;
+      font-size: 0.9rem;
       cursor: pointer;
     }
   }
