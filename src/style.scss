@@ -41,7 +41,7 @@ a {
 
 .discover {
   margin-top: 70px;
-  margin-bottom: 120px;
+  margin-bottom: 7.1rem;
 }
 .body-wrapper {
   padding: 0rem 0rem;
@@ -178,7 +178,7 @@ a {
       }
     }
   }
-  .artist-title{
+  .artist-title {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -333,11 +333,12 @@ a {
   display: flex;
   background-color: $app-back_3;
   width: 100%;
-  height: 14vh;
+  height: 6rem;
   z-index: 1;
   align-items: center;
   justify-content: center;
   align-items: center;
+
   .raw {
     margin: 0rem 0rem;
   }
@@ -347,155 +348,198 @@ a {
   .musicBanner {
     display: flex;
     color: #fff;
-    align-items: center;
+    align-items: flex-start;
     height: 100%;
-    padding: 1rem;
-
+    padding: 0.3rem;
+    padding-left: 1rem;
     img {
-      width: 100px;
+      width: 80px;
       margin-right: 0.4rem;
+      @media (max-width: 768px) {
+        width: 60px;
+      }
     }
     .musicBannerContent {
       display: flex;
       flex-direction: column;
       span {
-        font-size: 18px;
+        font-size: 1rem;
         margin-bottom: 2px;
       }
       p {
         margin-top: 0px;
+        margin-bottom: 0px;
         font-size: 14px;
         color: #b5b5b5;
       }
+      @media (max-width: 768px) {
+        span {
+          font-size: 0.9rem;
+        }
+        p {
+          font-size: 0.8rem;
+          color: #b5b5b5;
+        }
+      }
     }
   }
-  .player {
+
+  .inputButtons {
+    height: 6rem;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    flex-direction: column;
     align-items: center;
-    .inputButtons {
+    @media (max-width: 500px) {
+      justify-content: center;
+    }
+    .progressBar {
       display: flex;
-      flex-direction: column;
       align-items: center;
+      position: relative;
+      bottom: 8px;
+      right: 10px;
+      @media (max-width: 500px) {
+        display: none;
+      }
+      .currentTime {
+        color: #8b8b8b;
+        font-size: 0.9rem;
+        margin-right: 10px;
+      }
 
-      .progressBar {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        position: relative;
-        bottom: 8px;
-        right: 10px;
+      .currentProgress {
+        --seek-before-width: 0px;
+        appearance: none;
+        border-radius: 10px;
+        width: 40vw;
+        min-width: 180px;
+        margin: 0 10px;
+        background-color: $borderB;
+        height: 5px;
+        outline: none;
 
-        .currentTime {
-          color: #8b8b8b;
-          font-size: 0.9rem;
-          margin-right: 10px;
-        }
-
-        .currentProgress {
-          --seek-before-width: 0px;
+        ::-webkit-slider-thumb {
           appearance: none;
-          border-radius: 10px;
-          width: 380px;
-          margin: 0 10px;
-          background-color: $borderB;
-          height: 5px;
-          outline: none;
-
-          ::-webkit-slider-thumb {
-            appearance: none;
-            height: 14px;
-            width: 14px;
-            background-color: #a7a7a7;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            z-index: 3;
-            box-sizing: border-box;
-          }
-
-          :active::-webkit-slider-thumb {
-            transform: scale(1.2);
-          }
-          /* style the progress */
-          &::-webkit-slider-thumb {
-            background-image: linear-gradient(
-              to right,
-              #c7c7c7 0%,
-              #a7a7a7 calc(var(--seek-before-width) / 100),
-              #ff0000 calc(var(--seek-before-width) / 100),
-              #ff0101 100%
-            );
-          }
+          height: 14px;
+          width: 14px;
+          background-color: #a7a7a7;
+          border-radius: 50%;
+          border: none;
+          cursor: pointer;
+          position: relative;
+          z-index: 3;
+          box-sizing: border-box;
         }
 
-        .duration {
-          color: #8b8b8b;
-          font-size: 0.9rem;
+        :active::-webkit-slider-thumb {
+          transform: scale(1.2);
+        }
+        /* style the progress */
+        &::-webkit-slider-thumb {
+          background-image: linear-gradient(
+            to right,
+            #c7c7c7 0%,
+            #a7a7a7 calc(var(--seek-before-width) / 100),
+            #ff0000 calc(var(--seek-before-width) / 100),
+            #ff0101 100%
+          );
         }
       }
 
-      .buttons {
-        display: flex;
-        position: relative;
-        bottom: 5;
-        .clockwise {
-          font-size: 0.6rem;
-          i {
-            font-size: 1.4rem;
-          }
+      .duration {
+        color: #8b8b8b;
+        font-size: 0.9rem;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      position: relative;
+      bottom: 5;
+
+      .clockwise {
+        font-size: 0.6rem;
+        i {
+          font-size: 1.4rem;
         }
-        .playPause {
-          margin: 0 5px;
+        @media (max-width: 500px) {
+          display: none;
         }
-        button {
-          border: none;
-          outline: none;
-          border-radius: 50%;
-          background-color: transparent;
-          cursor: pointer;
+      }
+      .playPause {
+        margin: 0 5px;
+      }
+      button {
+        border: none;
+        outline: none;
+        border-radius: 50%;
+        background-color: transparent;
+        cursor: pointer;
+        color: $text-color;
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  .volumeC {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-direction: column;
+    height: 6rem;
+    @media (max-width: 768px) {
+      display: none;
+    }
+    .volome-icons {
+      padding-right: 1rem;
+      @media (max-width: 800px) {
+        padding-right: 0rem;
+      }
+      button {
+        margin-right: 0.5rem;
+        @media (max-width: 800px) {
+          margin-right: 0rem;
+        }
+      }
+      .randomMusicsButton {
+        background-color: transparent;
+        border: none;
+        i {
           color: $text-color;
           font-size: 1.4rem;
         }
       }
     }
-  }
-  .volumeC {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    .randomMusicsButton {
-      background-color: transparent;
-      border: none;
-      i {
-        color: $text-color;
-        font-size: 1.4rem;
+
+    .volumeProgress {
+      display: inline-flex;
+      align-items: center;
+      input {
+        appearance: none;
+        border-radius: 10px;
+        background-color: #494a4d;
+        height: 5px;
+        outline: none;
+        margin-right: 1rem;
+        width: 100%;
       }
-    }
-    input {
-      appearance: none;
-      border-radius: 10px;
-      background-color: #494a4d;
-      height: 5px;
-      outline: none;
-      margin-right: 15px;
-    }
-    input::-webkit-slider-thumb {
-      appearance: none;
-      height: 14px;
-      width: 14px;
-      background-color: #fff;
-      border-radius: 50%;
-    }
-    .volumeButton {
-      background-color: transparent;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      i {
-        color: $text-color;
-        font-size: 1.4rem;
+      input::-webkit-slider-thumb {
+        appearance: none;
+        height: 14px;
+        width: 14px;
+        background-color: #fff;
+        border-radius: 50%;
+      }
+      .volumeButton {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        i {
+          color: $text-color;
+          font-size: 1.4rem;
+        }
       }
     }
   }

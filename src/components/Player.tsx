@@ -155,12 +155,12 @@ export const Player: React.FC = () => {
             <Image src={currentMusic?.album_img} alt={currentMusic?.title} />
             <div className="musicBannerContent">
               <span>{currentMusic?.title}</span>
-              <p>{currentMusic?.album}</p>
+              <p>{currentMusic?.artist}</p>
             </div>
           </div>
           <audio ref={audioRef} src={currentMusic?.audio} />
         </Col>
-        <Col className="player">
+        <Col>
           <div className="inputButtons">
             <div className="buttons">
               <button className="clockwise" onClick={skipBack10}>
@@ -208,34 +208,45 @@ export const Player: React.FC = () => {
           </div>
         </Col>
         <Col className="volumeC">
-          <button
-            onClick={() => setIsRandom(!isRandom)}
-            className="randomMusicsButton"
-          >
-            {isRandom ? (
-              <i className="bi bi-shuffle" style={{ color: "#ff0000" }} />
-            ) : (
-              <i className="bi bi-shuffle" />
-            )}
-          </button>
-          <button
-            className="volumeButton buttons"
-            onClick={() => setIsMuted(!isMuted)}
-          >
-            {isMuted ? (
-              <i className="bi bi-volume-mute" />
-            ) : (
-              <i className="bi bi-volume-up" />
-            )}
-          </button>
-          <input
-            type="range"
-            step="0.01"
-            onChange={(e) => setVolume(e.target.value)}
-            value={volume}
-            max="1"
-            min="0"
-          />
+          <div className="volome-icons">
+            <button
+              onClick={() => setIsRandom(!isRandom)}
+              className="randomMusicsButton"
+            >
+              {isRandom ? (
+                <i className="bi bi-shuffle" style={{ color: "#ff0000" }} />
+              ) : (
+                <i className="bi bi-shuffle" />
+              )}
+            </button>
+            <button className="randomMusicsButton">
+              <i className="bi bi-fullscreen"></i>
+            </button>
+            <button className="randomMusicsButton">
+              <i className="bi bi-list-ul"></i>
+            </button>
+          </div>
+          <div className="volumeProgress">
+            <button
+              className="volumeButton buttons"
+              onClick={() => setIsMuted(!isMuted)}
+            >
+              {isMuted ? (
+                <i className="bi bi-volume-mute" />
+              ) : (
+                <i className="bi bi-volume-up" />
+              )}
+            </button>
+
+            <input
+              type="range"
+              step="0.01"
+              onChange={(e) => setVolume(e.target.value)}
+              value={volume}
+              max="1"
+              min="0"
+            />
+          </div>
         </Col>
       </Row>
     </Container>
