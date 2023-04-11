@@ -14,12 +14,12 @@ const playerSlice = createSlice({
   name: "player",
   initialState,
   reducers: {
-    addMusic: (state, action: PayloadAction<AddMusicPayload>) => {
+    addToPlayer: (state, action: PayloadAction<AddMusicPayload>) => {
       const { music } = action.payload;
       state.currentMusic = music;
     },
   },
 });
 
-export const { addMusic } = playerSlice.actions;
+export const { addToPlayer } = playerSlice.actions;
 export default playerSlice.reducer;
