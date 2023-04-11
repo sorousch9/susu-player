@@ -154,12 +154,14 @@ a {
       height: 100%;
       opacity: 0;
       transition: opacity 0.3s ease-in-out;
-
+      .star-icon {
+         background-color: #c6000000;
+      }
       a {
         color: #ffffff;
         background-color: #c60000;
-        margin: 0rem 0.5rem;
-        padding: 0rem 0.5rem;
+        margin: 0rem 0rem;
+        padding: 0rem 0.3rem 0rem 0.4rem;
         padding-bottom: 0.2rem;
         border-radius: 50%;
         align-content: center;
@@ -168,7 +170,7 @@ a {
             rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
         }
         i {
-          font-size: 1.5rem;
+          font-size: 1.1rem;
         }
       }
     }
