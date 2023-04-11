@@ -7,7 +7,7 @@ import feelGood from "../assets/feelGood.webp";
 import relaxing from "../assets/relaxing.webp";
 import traffic from "../assets/traffic.webp";
 import { Link } from "react-router-dom";
-const PlayList = () => {
+const PlaylistComponent = () => {
   const settings = {
     infinite: true,
     speed: 500,
@@ -83,4 +83,4 @@ const PlayList = () => {
   );
 };
 
-export default PlayList;
+export default PlaylistComponent;

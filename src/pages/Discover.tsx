@@ -2,13 +2,14 @@ import { MusicType } from "../types/music";
 import { Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PlayList from "../components/Playlist";
+import PlaylistComponent from "../components/PlaylistComponent";
 import { SusuExclusive } from "../components/SusuExclusive";
 import { HotTracks } from "../components/HotTracks";
 import { Featured } from "../components/Featured";
 import { DjMixed } from "../components/DjMixed";
 import { Footer } from "../components/Footer";
 import TrendingArtists from "../components/TrendingArtists";
+import PlayList from "./PlayList";
 type FilteredMusicsType = {
   topMusics: MusicType[];
   exclusive: MusicType[];
@@ -45,7 +46,8 @@ const Discover = () => {
   return (
     <Container>
       <Row className="discover">
-        <PlayList />
+        <PlayList/>
+        <PlaylistComponent />
         <SusuExclusive exclusiveMusic={filteredMusics.exclusive} />
         <Featured remixMusic={filteredMusics.remix} />
         <HotTracks topMusics={filteredMusics.topMusics} />
