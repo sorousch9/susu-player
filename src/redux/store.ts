@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import playerReducer from "./playerReducer";
+import playlistSlice from "./playlistReducer";
 
 import {
   persistStore,
@@ -18,7 +19,10 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({ player: playerReducer });
+const rootReducer = combineReducers({
+  player: playerReducer,
+  playlist: playlistSlice,
+});
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export type RootState = ReturnType<typeof rootReducer>;
 export const store = configureStore({
