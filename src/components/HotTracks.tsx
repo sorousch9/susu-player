@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { MusicType } from "../types/music";
 import { useDispatch } from "react-redux";
-import { addMusic } from "../redux/playerReducer";
+import { addToPlayer } from "../redux/playerReducer";
 type Props = {
   topMusics: MusicType[];
 };
@@ -52,7 +52,7 @@ export const HotTracks = ({ topMusics }: Props) => {
                 <button
                 key={music.id}
                 className="cart-wrapper"
-                onClick={() => dispatch(addMusic({ music }))}
+                onClick={() => dispatch(addToPlayer({ music }))}
               >
                 <Card className="card">
                   <Card.Img variant="top" src={music.album_img} />

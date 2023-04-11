@@ -2,7 +2,7 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import featured from "../assets/Featured.webp";
 import featured2 from "../assets/Featured2.webp";
 import { Link } from "react-router-dom";
-import { addMusic } from "../redux/playerReducer";
+import { addToPlayer } from "../redux/playerReducer";
 import { useDispatch } from "react-redux";
 import Slider from "react-slick";
 import { MusicType } from "../types/music";
@@ -47,7 +47,7 @@ export const Featured = ({ remixMusic }: Props) => {
               <button
                 key={music.id}
                 className="cart-wrapper"
-                onClick={() => dispatch(addMusic({ music }))}
+                onClick={() => dispatch(addToPlayer({ music }))}
               >
                 <Card className="card">
                   <Card.Img variant="top" src={featured} />
@@ -77,7 +77,7 @@ export const Featured = ({ remixMusic }: Props) => {
               <button
                 key={music.id}
                 className="cart-wrapper"
-                onClick={() => dispatch(addMusic({ music }))}
+                onClick={() => dispatch(addToPlayer({ music }))}
               >
                 <Card className="card">
                   <Card.Img variant="top" src={featured2} />

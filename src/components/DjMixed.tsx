@@ -2,7 +2,7 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { MusicType } from "../types/music";
-import { addMusic } from "../redux/playerReducer";
+import { addToPlayer } from "../redux/playerReducer";
 import { useDispatch } from "react-redux";
 type Props = {
   remixMusic: MusicType[];
@@ -47,7 +47,7 @@ export const DjMixed = ({ remixMusic }: Props) => {
                 <button
                 key={music.id}
                 className="cart-wrapper"
-                onClick={() => dispatch(addMusic({ music }))}
+                onClick={() => dispatch(addToPlayer({ music }))}
               >
                 <Card className="card">
                   <Card.Img variant="top" src={music.album_img} />

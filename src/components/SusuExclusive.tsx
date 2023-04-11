@@ -2,8 +2,9 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { MusicType } from "../types/music";
-import { addMusic } from "../redux/playerReducer";
+import { addToPlayer } from "../redux/playerReducer";
 import { useDispatch } from "react-redux";
+import { addToPlaylist } from "../redux/playlistReducer";
 type Props = {
   exclusiveMusic: MusicType[];
 };
@@ -44,19 +45,19 @@ export const SusuExclusive = ({ exclusiveMusic }: Props) => {
           <h4 className="component-title">Exclusive Music</h4>
           <Slider {...settings}>
             {exclusiveMusic.map((music) => (
-              <button
-                key={music.id}
-                className="cart-wrapper"
-                onClick={() => dispatch(addMusic({ music }))}
-              >
+              <div key={music.id} className="cart-wrapper">
                 <Card className="card">
                   <Card.Img variant="top" src={music.album_img} />
                   <Card.ImgOverlay className="card-img-overlay">
                     <div className="overlay-icon">
-                      <Link to="/">
+                      <Link
+                        to="/"
+                        onClick={() => dispatch(addToPlayer({ music }))}
+                      >
                         <i className="bi bi-play-fill" />
                       </Link>
-                      <Link to="/" className="star-icon">
+                      <Link to="/" className="star-icon"
+                      onClick={() => dispatch(addToPlaylist({ music }))}>
                         <i className="bi bi-star" />
                       </Link>
                     </div>
@@ -71,7 +72,7 @@ export const SusuExclusive = ({ exclusiveMusic }: Props) => {
                     {music.artist}
                   </Link>
                 </div>
-              </button>
+              </div>
             ))}
           </Slider>
         </Col>
