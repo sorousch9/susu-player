@@ -18,8 +18,12 @@ const playlistSlice = createSlice({
   reducers: {
     addToPlaylist: (state, action: PayloadAction<AddMusicPayload>) => {
       const { music } = action.payload;
-      state.musics.push(music);
+      const existingMusic = state.musics.find((m) => m.id === music.id);
+      if (!existingMusic) {
+        state.musics.push(music);
+      }
     },
+
     removeFromPlaylist: (state, action: PayloadAction<string>) => {
       state.musics = state.musics.filter(
         (music) => music.id !== action.payload
