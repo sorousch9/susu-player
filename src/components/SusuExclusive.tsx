@@ -56,7 +56,7 @@ export const SusuExclusive = ({ exclusiveMusic }: Props) => {
                       <Link to="/">
                         <i className="bi bi-play-fill" />
                       </Link>
-                      <Link to="/">
+                      <Link to="/" className="star-icon">
                         <i className="bi bi-star" />
                       </Link>
                     </div>
