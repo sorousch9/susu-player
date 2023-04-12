@@ -548,7 +548,7 @@ a {
 }
 
 //playlist
-.playlist {
+.list {
   table {
     border-collapse: collapse;
     width: 100%;
@@ -586,12 +586,14 @@ a {
         text-align: end;
         font-size: 1.4rem;
         cursor: pointer;
+        max-width: 1rem;
       }
 
       &:last-child {
         text-align: center;
         font-size: 1.4rem;
         cursor: pointer;
+        max-width: 1rem;
       }
     }
   }
