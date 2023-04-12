@@ -155,7 +155,7 @@ a {
       opacity: 0;
       transition: opacity 0.3s ease-in-out;
       .star-icon {
-         background-color: #c6000000;
+        background-color: #c6000000;
       }
       a {
         color: #ffffff;
@@ -546,6 +546,47 @@ a {
     }
   }
 }
+
+//playlist
+
+.playlist {
+  background-color: #111;
+  color: #fff;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      background-color: #222;
+      color: #fff;
+      border: none;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #444;
+      }
+    }
+  }
+
+  p {
+    margin: 1rem 0;
+  }
+}
+
 .footer {
   margin-top: 2rem;
   p {
