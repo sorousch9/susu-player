@@ -553,7 +553,7 @@ a {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 16px;
-
+    color: $text-color;
     caption {
       font-weight: bold;
       font-size: 20px;
@@ -566,6 +566,7 @@ a {
       text-align: left;
       border-bottom: 1px solid $borderB;
       vertical-align: middle;
+      
 
       &:first-child {
         width: 20px;
@@ -575,26 +576,22 @@ a {
       &:nth-child(2) {
         display: flex;
         align-items: center;
-
         img {
           width: 40px;
           height: 40px;
           margin-right: 16px;
         }
       }
+      &:nth-child(3) {
+        text-align: end;
+        font-size: 1.4rem;
+        cursor: pointer;
+      }
 
       &:last-child {
         text-align: center;
-      }
-    }
-    .table-btn {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      border-bottom: 1px solid $borderB;
-
-      &:hover {
-        text-decoration: none;
+        font-size: 1.4rem;
+        cursor: pointer;
       }
     }
   }
