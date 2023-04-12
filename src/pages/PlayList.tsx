@@ -25,19 +25,43 @@ const Playlist: React.FC<PlaylistProps> = ({ musics }) => {
 
   return (
     <div className="playlist">
-      <h2>Playlist</h2>
-      {playlist.length === 0 ? (
-        <p>Your playlist is empty</p>
-      ) : (
-        <ul>
-          {playlist.map((music) => (
-            <li key={music.id}>
-              {music.title} - {music.artist}{" "}
-              <button onClick={() => handleRemove(music.id)}>Remove</button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <table>
+        <caption>List of Songs</caption>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Song</th>
+            <th>Time</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        {playlist.length === 0 ? (
+          <tbody>
+            <tr>
+              <td colSpan={4}>Your playlist is empty</td>
+            </tr>
+          </tbody>
+        ) : (
+          <tbody>
+            {playlist.map((music) => (
+              <tr key={music.id}>
+                <td>1</td>
+                <td>
+                  <img src={music.album_img} alt={music.title} />
+                  {music.title}
+                </td>
+                <td>00:00</td>
+                <td
+                  onClick={() => handleRemove(music.id)}
+                  className="table-btn"
+                >
+                  <i className="bi bi-x" />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        )}
+      </table>
     </div>
   );
 };

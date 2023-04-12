@@ -548,45 +548,57 @@ a {
 }
 
 //playlist
-
 .playlist {
-  background-color: #111;
-  color: #fff;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 16px;
 
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
+    caption {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
 
-  ul {
-    list-style: none;
-    padding: 0;
-  }
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid $borderB;
+      vertical-align: middle;
 
-  li {
-    margin-bottom: 0.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+      &:first-child {
+        width: 20px;
+        text-align: center;
+      }
 
-    button {
-      background-color: #222;
-      color: #fff;
+      &:nth-child(2) {
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 40px;
+          height: 40px;
+          margin-right: 16px;
+        }
+      }
+
+      &:last-child {
+        text-align: center;
+      }
+    }
+    .table-btn {
+      background-color: transparent;
       border: none;
-      padding: 0.25rem 0.5rem;
       cursor: pointer;
+      border-bottom: 1px solid $borderB;
 
       &:hover {
-        background-color: #444;
+        text-decoration: none;
       }
     }
   }
-
-  p {
-    margin: 1rem 0;
-  }
 }
-
 .footer {
   margin-top: 2rem;
   p {
