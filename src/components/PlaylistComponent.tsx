@@ -7,6 +7,8 @@ import feelGood from "../assets/feelGood.webp";
 import relaxing from "../assets/relaxing.webp";
 import traffic from "../assets/traffic.webp";
 import { Link } from "react-router-dom";
+import { addToPlaylist } from "../redux/playlistReducer";
+
 const PlaylistComponent = () => {
   const settings = {
     infinite: true,
@@ -63,7 +65,7 @@ const PlaylistComponent = () => {
                         <i className="bi bi-play-fill" />
                       </Link>
                       <Link to="/" className="star-icon">
-                        <i className="bi bi-star" />
+                        <i className="bi bi-fullscreen" />
                       </Link>
                     </div>
                   </Card.ImgOverlay>
