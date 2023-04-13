@@ -4,10 +4,11 @@ import Sidebar from "./components/Sidebar";
 import { Container, Row, Col } from "react-bootstrap";
 import Player from "./components/Player";
 import Header from "./components/Header";
+import Playlist from "./pages/PlayList";
 function App() {
   return (
     <BrowserRouter>
-      <Container fluid >
+      <Container fluid>
         <Row>
           <Col md={3} xl={2} className="sidebar-wrapper">
             <Sidebar />
@@ -16,6 +17,7 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Discover />} />
+              <Route path="/playlist" element={<Playlist />} />
             </Routes>
           </Col>
         </Row>
