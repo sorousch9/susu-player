@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import { MusicType } from "../types/music";
 import { addToPlayer } from "../redux/playerReducer";
 import { useDispatch } from "react-redux";
+import { addToPlaylist } from "../redux/playlistReducer";
 type Props = {
   remixMusic: MusicType[];
 };
@@ -44,7 +45,7 @@ export const DjMixed = ({ remixMusic }: Props) => {
           <h4 className="component-title">Dj Mixes</h4>
           <Slider {...settings}>
             {remixMusic.map((music) => (
-                <button
+              <button
                 key={music.id}
                 className="cart-wrapper"
                 onClick={() => dispatch(addToPlayer({ music }))}
@@ -56,7 +57,11 @@ export const DjMixed = ({ remixMusic }: Props) => {
                       <Link to="/">
                         <i className="bi bi-play-fill" />
                       </Link>
-                      <Link to="/" className="star-icon">
+                      <Link
+                        to="/"
+                        className="star-icon"
+                        onClick={() => dispatch(addToPlaylist({ music }))}
+                      >
                         <i className="bi bi-star" />
                       </Link>
                     </div>

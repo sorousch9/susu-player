@@ -6,6 +6,7 @@ import { addToPlayer } from "../redux/playerReducer";
 import { useDispatch } from "react-redux";
 import Slider from "react-slick";
 import { MusicType } from "../types/music";
+import { addToPlaylist } from "../redux/playlistReducer";
 type Props = {
   remixMusic: MusicType[];
 };
@@ -86,7 +87,11 @@ export const Featured = ({ remixMusic }: Props) => {
                       <Link to="/">
                         <i className="bi bi-play-fill" />
                       </Link>
-                      <Link to="/" className="star-icon">
+                      <Link
+                        to="/"
+                        className="star-icon"
+                        onClick={() => dispatch(addToPlaylist({ music }))}
+                      >
                         <i className="bi bi-star" />
                       </Link>
                     </div>

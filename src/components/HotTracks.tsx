@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { MusicType } from "../types/music";
 import { useDispatch } from "react-redux";
 import { addToPlayer } from "../redux/playerReducer";
+import { addToPlaylist } from "../redux/playlistReducer";
 type Props = {
   topMusics: MusicType[];
 };
@@ -62,7 +63,7 @@ export const HotTracks = ({ topMusics }: Props) => {
                         <i className="bi bi-play-fill" />
                       </Link>
                       <Link to="/" className="star-icon">
-                        <i className="bi bi-star" />
+                        <i className="bi bi-star"  onClick={() => dispatch(addToPlaylist({ music }))}/>
                       </Link>
                     </div>
                   </Card.ImgOverlay>
