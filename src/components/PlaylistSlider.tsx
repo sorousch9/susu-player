@@ -1,15 +1,12 @@
 import Slider from "react-slick";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import todayHits from "../assets/todayHits.webp";
-import crush from "../assets/crush.webp";
-import dance from "../assets/dance.webp";
-import feelGood from "../assets/feelGood.webp";
-import relaxing from "../assets/relaxing.webp";
-import traffic from "../assets/traffic.webp";
 import { Link } from "react-router-dom";
-import { addToPlaylist } from "../redux/playlistReducer";
+import { Playlist } from "../types/playlist";
 
-const PlaylistComponent = () => {
+interface PlaylistProps {
+  playlist: Playlist[];
+}
+const PlaylistSlider: React.FC<PlaylistProps> = ({ playlist }) => {
   const settings = {
     infinite: true,
     speed: 500,
@@ -41,14 +38,7 @@ const PlaylistComponent = () => {
       },
     ],
   };
-  const playlist = [
-    { id: 1, img: todayHits, title: "Today Top Hits" },
-    { id: 2, img: crush, title: "Crush" },
-    { id: 3, img: dance, title: "Dance" },
-    { id: 4, img: feelGood, title: "Feel Good" },
-    { id: 5, img: relaxing, title: "Relaxing" },
-    { id: 6, img: traffic, title: "Traffic" },
-  ];
+
   return (
     <Container>
       <Row>
@@ -56,15 +46,12 @@ const PlaylistComponent = () => {
           <h4 className="component-title">Playlist</h4>
           <Slider {...settings}>
             {playlist.map((item) => (
-              <div key={item.id} className="cart-wrapper">
+              <Link to={`/playlist/${item.title}`} key={item.id} className="cart-wrapper">
                 <Card className="card">
                   <Card.Img variant="top" src={item.img} />
                   <Card.ImgOverlay className="card-img-overlay">
                     <div className="overlay-icon">
-                      <Link to="/">
-                        <i className="bi bi-play-fill" />
-                      </Link>
-                      <Link to="/" className="star-icon">
+                      <Link to={`/playlist/${item.title}`} className="star-icon">
                         <i className="bi bi-fullscreen" />
                       </Link>
                     </div>
@@ -76,7 +63,7 @@ const PlaylistComponent = () => {
                     <i className="bi bi-music-note-list" />
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </Slider>
         </Col>
@@ -85,4 +72,4 @@ const PlaylistComponent = () => {
   );
 };
 
-export default PlaylistComponent;
+export default PlaylistSlider;
