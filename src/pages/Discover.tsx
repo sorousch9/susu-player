@@ -9,7 +9,6 @@ import { Featured } from "../components/Featured";
 import { DjMixed } from "../components/DjMixed";
 import { Footer } from "../components/Footer";
 import TrendingArtists from "../components/TrendingArtists";
-import PlayList from "./PlayList";
 type FilteredMusicsType = {
   topMusics: MusicType[];
   exclusive: MusicType[];
@@ -46,7 +45,6 @@ const Discover = () => {
   return (
     <Container>
       <Row className="discover">
-        <PlayList/>
         <PlaylistComponent />
         <SusuExclusive exclusiveMusic={filteredMusics.exclusive} />
         <Featured remixMusic={filteredMusics.remix} />
