@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { Badge, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.webp";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const Sidebar = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
@@ -11,7 +13,7 @@ const Sidebar = () => {
     setExpanded(!expanded);
   };
   const handleToggleDD = () => setIsOpen(!isOpen);
-
+  const playlist = useSelector((state: RootState) => state.playlist.musics);
   return (
     <Navbar className="sidebar" expand="md" variant="dark">
       <NavLink to="/" className="logo">
@@ -55,8 +57,9 @@ const Sidebar = () => {
                   <NavLink className="listSideBar" to="/">
                     <i className="bi bi-music-note"></i> Songs
                   </NavLink>
-                  <NavLink className="listSideBar" to="/">
-                    <i className="bi bi-heart" /> Liked Songs
+                  <NavLink className="listSideBar" to="/playlist">
+                    <i className="bi bi-heart" /> My Playlist
+                    <Badge>{playlist.length}</Badge>
                   </NavLink>
                   <NavLink className="listSideBar" to="/">
                     <i className="bi bi-broadcast-pin" /> Podcasts
