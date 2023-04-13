@@ -1,27 +1,13 @@
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { MusicType } from "../types/music";
 import { RootState } from "../redux/store";
-import { addToPlaylist, removeFromPlaylist } from "../redux/playlistReducer";
+import { removeFromPlaylist } from "../redux/playlistReducer";
 import { addToPlayer } from "../redux/playerReducer";
 import { Card, Col, Row, Table } from "react-bootstrap";
 import headImg from "../assets/playlistCom.webp";
-interface PlaylistProps {
-  musics?: MusicType[];
-}
 
-const Playlist: React.FC<PlaylistProps> = ({ musics }) => {
+const Playlist = () => {
   const playlist = useSelector((state: RootState) => state.playlist.musics);
   const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (musics) {
-      musics.forEach((music) => {
-        dispatch(addToPlaylist({ music }));
-      });
-    }
-  }, [dispatch, musics]);
-
   const handleRemove = (id: string) => {
     dispatch(removeFromPlaylist(id));
   };
