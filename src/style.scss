@@ -113,6 +113,9 @@ a {
   outline: none;
   color: $text-color;
   text-align: start;
+  &:hover {
+    color: $bar-bg;
+  }
   .aa {
     display: flex;
     justify-content: center;
@@ -569,12 +572,17 @@ a {
     width: 100%;
     margin-bottom: 16px;
     color: $text-color;
+
     caption {
       font-weight: bold;
       font-size: 20px;
       margin-bottom: 8px;
     }
-
+    tr {
+      &:hover {
+        background-color: $app-back_Hover;
+      }
+    }
     th,
     td {
       padding: 8px;
@@ -602,12 +610,40 @@ a {
         cursor: pointer;
         max-width: 1rem;
       }
+      &:nth-child(4) {
+        text-align: end;
+        font-size: 1.4rem;
+        cursor: pointer;
+        max-width: 1rem;
+      }
 
       &:last-child {
         text-align: center;
         font-size: 1.4rem;
         cursor: pointer;
         max-width: 1rem;
+        padding-right: 1rem;
+      }
+      @media (max-width: 1200px) {
+        &:nth-child(3) {
+          text-align: end;
+          font-size: 1.4rem;
+          cursor: pointer;
+          min-width: 2rem;
+        }
+        &:nth-child(4) {
+          text-align: end;
+          font-size: 1.4rem;
+          cursor: pointer;
+          min-width: 2rem;
+        }
+
+        &:last-child {
+          text-align: center;
+          font-size: 1.4rem;
+          cursor: pointer;
+          min-width: 2rem;
+        }
       }
     }
   }
