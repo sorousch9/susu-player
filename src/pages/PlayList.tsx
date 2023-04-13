@@ -4,7 +4,7 @@ import { MusicType } from "../types/music";
 import { RootState } from "../redux/store";
 import { addToPlaylist, removeFromPlaylist } from "../redux/playlistReducer";
 import { addToPlayer } from "../redux/playerReducer";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row, Table } from "react-bootstrap";
 import headImg from "../assets/playlistCom.webp";
 interface PlaylistProps {
   musics?: MusicType[];
@@ -28,22 +28,26 @@ const Playlist: React.FC<PlaylistProps> = ({ musics }) => {
 
   return (
     <div className="list">
-      <Card style={{ maxWidth: "680px" }} bg="transparent">
+      <Card style={{ maxWidth: "480px" }} bg="transparent">
         <Row>
-          <Col md={4}>
+          <Col>
             <Card.Img src={headImg} />
           </Col>
-          <Col md={8}>
+          <Col>
             <Card.Body>
-              <h2>My Playlist</h2>
-              <Card.Text>your favorite music are here</Card.Text>
-              <Card.Text><small>{playlist.length} Songs</small></Card.Text>
+              <span></span>
+              <div>
+                <h2>My Playlist</h2>
+                <Card.Text>your favorite music are here</Card.Text>
+              </div>
+              <Card.Text>
+                <small>{playlist.length} Songs</small>
+              </Card.Text>
             </Card.Body>
           </Col>
         </Row>
       </Card>
-
-      <table>
+      <Table>
         <caption>List of your playlist</caption>
         <thead>
           <tr>
@@ -78,7 +82,7 @@ const Playlist: React.FC<PlaylistProps> = ({ musics }) => {
             ))}
           </tbody>
         )}
-      </table>
+      </Table>
     </div>
   );
 };

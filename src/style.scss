@@ -319,6 +319,10 @@ a {
       }
     }
     .dropdown {
+      .badge {
+        margin-left: 0.3rem;
+        background-color: $borderB !important;
+      }
       button {
         margin-top: 1rem;
         border: none;
@@ -549,6 +553,17 @@ a {
 
 //playlist
 .list {
+  margin-top: 75px;
+  margin-bottom: 7.1rem;
+  margin-left: 1rem;
+  .card-body {
+    padding: 0rem 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+  }
   table {
     border-collapse: collapse;
     width: 100%;
@@ -566,7 +581,6 @@ a {
       text-align: left;
       border-bottom: 1px solid $borderB;
       vertical-align: middle;
-      
 
       &:first-child {
         width: 20px;
