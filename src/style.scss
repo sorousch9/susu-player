@@ -120,13 +120,17 @@ a {
           &:hover {
             background-color: $app-back_Hover;
           }
+
           .result-container {
             display: flex;
             padding: 0.2rem;
-            a {
-              text-decoration: inherit;
-              color: inherit;
-              margin-left: 1rem;
+            .title-results {
+              margin-left: 0.5rem;
+              display: flex;
+              flex-direction: column;
+              span {
+                font-size: 0.7rem;
+              }
             }
             img {
               height: 3rem;

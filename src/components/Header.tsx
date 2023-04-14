@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { MusicType } from "../types/music";
 import { Link } from "react-router-dom";
+import { addToPlayer } from "../redux/playerReducer";
+import { useDispatch } from "react-redux";
 const Header = () => {
   const [searchValue, setSearchValue] = useState<MusicType[]>([]);
   const [query, setQuery] = useState<string>("");
-
+  const dispatch = useDispatch();
   const handleSearch = async (searchQuery: string) => {
     const response = await axios.get<MusicType[]>(
       `http://localhost:3009/musics?q=${searchQuery}`
@@ -42,9 +44,14 @@ const Header = () => {
             <ul className="search-results">
               {searchValue.map((music) => (
                 <li key={music.id}>
-                  <div className="result-container">
-                    <img src={music.album_img} alt={music.title}></img>
-                    <Link to={`/musics/${music.id}`}>{music.title}</Link>
+                  <div onClick={() => dispatch(addToPlayer({ music }))}>
+                    <div className="result-container">
+                      <img src={music.album_img} alt={music.title}></img>
+                      <div className="title-results">
+                        <h6>{music.title}</h6>
+                        <span>album : {music.album}</span>
+                      </div>
+                    </div>
                   </div>
                 </li>
               ))}
