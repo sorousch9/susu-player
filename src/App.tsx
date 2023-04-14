@@ -8,23 +8,12 @@ import Player from "./components/Player";
 import Header from "./components/Header";
 import Playlist from "./pages/PlayList";
 import { MusicType } from "./types/music";
-import todayHits from "./assets/todayHits.webp";
-import crush from "./assets/crush.webp";
-import dance from "./assets/dance.webp";
-import feelGood from "./assets/feelGood.webp";
-import relaxing from "./assets/relaxing.webp";
-import traffic from "./assets/traffic.webp";
+
 import { FilteredMusicsType } from "./types/filteredMusicsType";
 import MusicPlaylist from "./components/MusicPlaylist";
+import { playlist } from "./staticData";
+import Songs from "./pages/Songs";
 
-const playlist = [
-  { id: 1, img: todayHits, title: "Today Top Hits" },
-  { id: 2, img: crush, title: "Crush" },
-  { id: 3, img: dance, title: "Dance" },
-  { id: 4, img: feelGood, title: "Feel Good" },
-  { id: 5, img: relaxing, title: "Relaxing" },
-  { id: 6, img: traffic, title: "Traffic" },
-];
 function App() {
   const [musics, setMusics] = useState<MusicType[]>([]);
   const [filteredMusics, setFilteredMusics] = useState<FilteredMusicsType>({
@@ -62,6 +51,16 @@ function App() {
           <Col md={9} xl={10} className="body-wrapper">
             <Header />
             <Routes>
+              <Route path="/songs" element={<Songs musics={musics} />} />
+              <Route
+                path="/"
+                element={
+                  <Discover
+                    filteredMusics={filteredMusics}
+                    playlist={playlist}
+                  />
+                }
+              />
               {playlist.map((item) => (
                 <Route
                   key={item.id}
@@ -75,15 +74,6 @@ function App() {
                 />
               ))}
               <Route path="/playlist" element={<Playlist />} />
-              <Route
-                path="/"
-                element={
-                  <Discover
-                    filteredMusics={filteredMusics}
-                    playlist={playlist}
-                  />
-                }
-              />
             </Routes>
           </Col>
         </Row>
