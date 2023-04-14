@@ -1,12 +1,13 @@
 import Slider from "react-slick";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Playlist } from "../types/playlist";
 
 interface PlaylistProps {
   playlist: Playlist[];
 }
 const PlaylistSlider: React.FC<PlaylistProps> = ({ playlist }) => {
+  const navigate = useNavigate();
   const settings = {
     infinite: true,
     speed: 500,
@@ -46,12 +47,19 @@ const PlaylistSlider: React.FC<PlaylistProps> = ({ playlist }) => {
           <h4 className="component-title">Playlist</h4>
           <Slider {...settings}>
             {playlist.map((item) => (
-              <Link to={`/playlist/${item.title}`} key={item.id} className="cart-wrapper">
+              <div
+                onClick={() => navigate(`/playlist/${item.title}`)}
+                key={item.id}
+                className="cart-wrapper"
+              >
                 <Card className="card">
                   <Card.Img variant="top" src={item.img} />
                   <Card.ImgOverlay className="card-img-overlay">
                     <div className="overlay-icon">
-                      <Link to={`/playlist/${item.title}`} className="star-icon">
+                      <Link
+                        to={`/playlist/${item.title}`}
+                        className="star-icon"
+                      >
                         <i className="bi bi-fullscreen" />
                       </Link>
                     </div>
@@ -63,7 +71,7 @@ const PlaylistSlider: React.FC<PlaylistProps> = ({ playlist }) => {
                     <i className="bi bi-music-note-list" />
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </Slider>
         </Col>

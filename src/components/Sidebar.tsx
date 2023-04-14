@@ -42,7 +42,7 @@ const Sidebar = () => {
               <i className="bi bi-bullseye" />
               Discover
             </NavLink>
-            <NavLink className="listSideBar" to="/">
+            <NavLink className="listSideBar" to="/songs">
               <i className="bi bi-collection-play-fill" /> Browse
             </NavLink>
             <NavLink className="listSideBar" to="/">
@@ -54,7 +54,7 @@ const Sidebar = () => {
               </button>
               {isOpen && (
                 <span>
-                  <NavLink className="listSideBar" to="/">
+                  <NavLink className="listSideBar" to="/songs">
                     <i className="bi bi-music-note"></i> Songs
                   </NavLink>
                   <NavLink className="listSideBar" to="/playlist">

@@ -25,7 +25,7 @@ const MusicPlaylist: React.FC<PlaylistProps> = ({ musics, playlistItem }) => {
               <span></span>
               <div>
                 <h2>{playlistItem.title}</h2>
-                <Card.Text>your favorite music are here</Card.Text>
+                <Card.Text>{playlistItem.description}</Card.Text>
               </div>
               <Card.Text>
                 <small>{musics.length} Songs</small>
@@ -42,7 +42,6 @@ const MusicPlaylist: React.FC<PlaylistProps> = ({ musics, playlistItem }) => {
             <th>Song</th>
             <th></th>
             <th></th>
-          
           </tr>
         </thead>
         {musics.length === 0 ? (
@@ -66,7 +65,6 @@ const MusicPlaylist: React.FC<PlaylistProps> = ({ musics, playlistItem }) => {
                 <td onClick={() => dispatch(addToPlaylist({ music }))}>
                   <i className="bi bi-star" />
                 </td>
-               
               </tr>
             ))}
           </tbody>
