@@ -13,6 +13,16 @@ export const Player: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [volume, setVolume] = useState<string>("1");
   const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
+
+  const handleFullScreen = () => {
+    if (!isFullScreen) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+    setIsFullScreen(!isFullScreen);
+  };
 
   const currentMusic = useSelector(
     (state: RootState) => state.player.currentMusic
@@ -209,20 +219,17 @@ export const Player: React.FC = () => {
         </Col>
         <Col className="volumeC">
           <div className="volome-icons">
-            <button
-              onClick={() => setIsRandom(!isRandom)}
-              className="randomMusicsButton"
-            >
+            <button onClick={() => setIsRandom(!isRandom)}>
               {isRandom ? (
                 <i className="bi bi-shuffle" style={{ color: "#ff0000" }} />
               ) : (
                 <i className="bi bi-shuffle" />
               )}
             </button>
-            <button className="randomMusicsButton">
+            <button onClick={handleFullScreen}>
               <i className="bi bi-fullscreen"></i>
             </button>
-            <button className="randomMusicsButton">
+            <button>
               <i className="bi bi-list-ul"></i>
             </button>
           </div>
