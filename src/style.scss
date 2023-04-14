@@ -553,16 +553,14 @@ a {
       }
       button {
         margin-right: 0.5rem;
-        @media (max-width: 800px) {
-          margin-right: 0rem;
-        }
-      }
-      .randomMusicsButton {
         background-color: transparent;
         border: none;
         i {
           color: $text-color;
           font-size: 1.4rem;
+        }
+        @media (max-width: 800px) {
+          margin-right: 0rem;
         }
       }
     }

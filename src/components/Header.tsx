@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { MusicType } from "../types/music";
-import { Link } from "react-router-dom";
 import { addToPlayer } from "../redux/playerReducer";
 import { useDispatch } from "react-redux";
 const Header = () => {
