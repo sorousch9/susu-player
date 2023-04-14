@@ -227,10 +227,14 @@ export const Player: React.FC = () => {
               )}
             </button>
             <button onClick={handleFullScreen}>
-              <i className="bi bi-fullscreen"></i>
+              {isFullScreen ? (
+                <i className="bi bi-fullscreen" style={{ color: "#ff0000" }} />
+              ) : (
+                <i className="bi bi-fullscreen" />
+              )}
             </button>
             <button>
-              <i className="bi bi-list-ul"></i>
+              <i className="bi bi-list-ul" />
             </button>
           </div>
           <div className="volumeProgress">
